@@ -22,5 +22,5 @@ Lo hacemos junto a dos entidades que trabajan en el medio rural como nosotros. *
 - Una visita de estudio en Portugal para el equipo de las entidades.
 - **Roots and Routes**, talleres en los pueblos de cada país que juntan a jóvenes y mayores.
 
-Toda la información está en la [página del proyecto](/horizonterioja/proyectos/rural-identities/). Cuando abramos la convocatoria para participar en los campamentos, la publicaremos aquí.
+Toda la información está en la [página del proyecto](/proyectos/rural-identities/). Cuando abramos la convocatoria para participar en los campamentos, la publicaremos aquí.
 

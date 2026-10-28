@@ -4,10 +4,10 @@ Web de la Asociación Juvenil Horizonte Rioja (Logroño, La Rioja). Astro 6 est�
 Tercera web de la red, junto a EstrellasDelSur y EstrellasEuropa. No mezclar identidades: Horizonte
 no es Estrellas del Sur ni la continuación de sus proyectos.
 
-## Base path
-Sin dominio propio, la web vive en `/horizonterioja/`. En `.astro` usar siempre
+## Dominio y rutas
+La web vive en https://www.horizonterioja.eu (raíz del dominio). En `.astro` usar siempre
 `${base}/ruta/` con `base = import.meta.env.BASE_URL.replace(/\/$/, '')`. En Markdown los enlaces
-internos llevan el prefijo a mano (`/horizonterioja/...`), así que hay que cambiarlos si llega el dominio.
+internos van desde la raíz (`/proyectos/...`).
 
 ## Datos
 - Datos legales, junta y menú en `src/lib/site.js`. Fuentes: resolución de inscripción del

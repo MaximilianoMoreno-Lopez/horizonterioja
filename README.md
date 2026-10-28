@@ -2,13 +2,13 @@
 
 Web de la Asociación Juvenil Horizonte Rioja. Está hecha con [Astro](https://astro.build) y se publica sola en GitHub Pages.
 
-- Web: https://maximilianomoreno-lopez.github.io/horizonterioja/
+- Web: https://www.horizonterioja.eu
 
 ## Trabajar en local
 
 ```bash
 npm install      # solo la primera vez
-npm run dev      # abre http://localhost:4321/horizonterioja/
+npm run dev      # abre http://localhost:4321/
 npm run build    # genera la web en dist/
 ```
 
@@ -42,12 +42,8 @@ description: "Una o dos frases para la tarjeta y para Google."
 Texto en Markdown.
 ```
 
-## Dominio propio
+## Dominio
 
-Cuando haya dominio (por ejemplo `horizonterioja.org`):
-
-1. En `astro.config.mjs`, poner `SITE` al dominio y `BASE` a `'/'`.
-2. Crear `public/CNAME` con el dominio dentro.
-3. En el proveedor del dominio, apuntar los DNS a GitHub Pages.
-4. En Settings → Pages, escribir el dominio en **Custom domain** y activar **Enforce HTTPS**.
-5. Cambiar la URL de `public/robots.txt` y los enlaces internos escritos a mano en las noticias (`/horizonterioja/...`).
+La web usa el dominio propio `www.horizonterioja.eu`, configurado en Settings → Pages → Custom domain con HTTPS
+forzado. Como se publica con GitHub Actions, no hace falta fichero `CNAME`. Si algún día cambia el dominio, hay que
+actualizar `SITE` en `astro.config.mjs`, la URL de `public/robots.txt` y el dominio en Settings → Pages.

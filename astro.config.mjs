@@ -1,11 +1,9 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// Mientras no haya dominio propio, la web vive en
-// https://maximilianomoreno-lopez.github.io/horizonterioja/
-// Con dominio propio: cambiar SITE al dominio y BASE a '/'.
-const SITE = 'https://maximilianomoreno-lopez.github.io';
-const BASE = '/horizonterioja';
+// Dominio propio configurado en GitHub Pages (Settings → Pages → Custom domain).
+const SITE = 'https://www.horizonterioja.eu';
+const BASE = '/';
 
 export default defineConfig({
   site: SITE,
