@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { ORG } from '../lib/site.js';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const noticias = (await getCollection('noticias'))
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .slice(0, 3);
+
+const ejes = [
+  {
+    titulo: 'Pueblos con vida',
+    texto: 'Vivir en un pueblo no debería significar tener menos oportunidades. Llevamos actividades, información y recursos a los municipios donde casi nunca llegan.',
+    icon: '<path d="M3 21h18M5 21V10l7-5 7 5v11"/><path d="M10 21v-6h4v6"/>',
+  },
+  {
+    titulo: 'Diversidad sin miedo',
+    texto: 'Creamos espacios seguros para hablar de igualdad de género y derechos LGTBIQ+ en el medio rural, donde todavía cuesta más ser quien eres.',
+    icon: '<path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/>',
+  },
+  {
+    titulo: 'Europa al alcance',
+    texto: 'Acercamos Erasmus+ y el Cuerpo Europeo de Solidaridad a jóvenes que nunca se habían planteado un intercambio, una formación o un voluntariado fuera.',
+    icon: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  },
+  {
+    titulo: 'Territorio sostenible',
+    texto: 'El clima y el cuidado del entorno se viven de cerca en el campo. Trabajamos la sostenibilidad desde lo práctico y lo local.',
+    icon: '<path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 16-9 0 12-4 16-9 16z"/><path d="M4 20c4-4 7-6 11-8"/>',
+  },
+];
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="eyebrow">Asociación juvenil · La Rioja</span>
+      <h1>Juventud rural con <em>horizonte</em> europeo</h1>
+      <p class="lead">
+        Somos gente joven que ha crecido en pueblos de La Rioja. Trabajamos para que quedarse en el medio rural
+        no signifique renunciar a nada, y para que Europa también se viva desde aquí.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={`${base}/que-hacemos/`}>Qué hacemos</a>
+        <a class="btn btn-ghost" href={`${base}/contacto/`}>Escríbenos</a>
+      </div>
+    </div>
+    <svg class="hero-landscape" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
+      <circle cx="1080" cy="120" r="70" fill="#e0a43a" opacity=".9"/>
+      <path d="M0 150 C240 90 420 110 640 140 S1060 100 1440 130 V220 H0 Z" fill="#3f6b3a"/>
+      <path d="M0 180 C260 150 520 170 760 182 S1180 160 1440 170 V220 H0 Z" fill="#2f5229"/>
+    </svg>
+  </section>
+
+  <section class="container destacado-wrap">
+    <a class="destacado" href={`${base}/proyectos/rural-identities/`}>
+      <span class="tag">Erasmus+ KA210 · Concedido</span>
+      <h2>Rural Identities</h2>
+      <p>Nuestro primer proyecto europeo. Arte y juventud rural en La Rioja, Italia y Portugal durante 2027.</p>
+      <span class="ver">Ver el proyecto →</span>
+    </a>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Qué nos mueve</span>
+      <h2>Cuatro ejes de trabajo</h2>
+      <div class="grid grid-2 ejes">
+        {ejes.map((e) => (
+          <article class="card">
+            <div class="icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={e.icon} />
+            </div>
+            <h3>{e.titulo}</h3>
+            <p>{e.texto}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Con quién trabajamos</span>
+        <h2>Jóvenes de 14 a 30 años del medio rural riojano</h2>
+      </div>
+      <div>
+        <p>
+          Sobre todo con quienes viven en zonas despobladas o con menos recursos, tienen ganas de hacer cosas y
+          necesitan a alguien que les oriente, les anime o les ayude a dar el primer paso.
+        </p>
+        <p>
+          Trabajamos con educación no formal, aprendiendo haciendo, en grupo y desde lo que cada persona trae.
+          Y lo hacemos de la mano de colegios, centros de juventud y entidades locales.
+        </p>
+        <a href={`${base}/quienes-somos/`}>Conoce a la asociación</a>
+      </div>
+    </div>
+  </section>
+
+  {noticias.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">Actualidad</span>
+        <h2>Lo último</h2>
+        <div class="grid grid-3">
+          {noticias.map((n) => (
+            <a class="card news-card" href={`${base}/actualidad/${n.id}/`}>
+              <time datetime={n.data.date}>{new Date(n.data.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}</time>
+              <h3>{n.data.title}</h3>
+              <p>{n.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section cta">
+    <div class="container cta-inner">
+      <h2>¿Tienes una idea para tu pueblo?</h2>
+      <p>Si eres joven, vives en La Rioja y quieres participar, proponer una actividad o irte de intercambio, escríbenos.</p>
+      <a class="btn btn-primary" href={`mailto:${ORG.email}`}>{ORG.email}</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 72px 0 200px;
+    background: linear-gradient(180deg, #f6e7d2 0%, var(--crema) 70%);
+    overflow: hidden;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero h1 { max-width: 15ch; }
+  .hero h1 em { font-style: italic; color: var(--vino); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .hero-landscape { position: absolute; left: 0; bottom: 0; width: 100%; height: 180px; }
+
+  .ejes { margin-top: 28px; }
+
+  .destacado-wrap { margin-top: -40px; position: relative; z-index: 2; }
+  .destacado {
+    display: block;
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-left: 6px solid var(--horizonte);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 28px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .2s;
+  }
+  .destacado:hover { transform: translateY(-3px); color: inherit; }
+  .destacado h2 { margin: .3em 0 .3em; }
+  .destacado .tag { font-size: .8rem; font-weight: 600; color: #003399; background: #eef2fb; padding: 4px 10px; border-radius: 999px; }
+  .destacado .ver { font-weight: 600; color: var(--vino); }
+
+  .split { display: grid; gap: 24px; }
+  @media (min-width: 860px) { .split { grid-template-columns: 1fr 1.2fr; gap: 56px; } }
+
+  .news-card { text-decoration: none; color: inherit; transition: transform .2s; }
+  .news-card:hover { transform: translateY(-3px); color: inherit; }
+  .news-card time { font-size: .85rem; color: var(--vina); font-weight: 600; }
+  .news-card h3 { margin-top: .4em; }
+
+  .cta { background: var(--vino); color: #f6e9ed; }
+  .cta h2 { color: #fff; }
+  .cta-inner { text-align: center; max-width: 720px; }
+  .cta .btn-primary { background: var(--horizonte); color: var(--tinta); }
+  .cta .btn-primary:hover { background: #f0b850; color: var(--tinta); }
+</style>

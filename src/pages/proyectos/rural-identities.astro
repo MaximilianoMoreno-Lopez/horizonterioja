@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EUDisclaimer from '../../components/EUDisclaimer.astro';
+import { ORG } from '../../lib/site.js';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Datos de la solicitud KA210-YOU de la ronda 1 de 2026, concedida.
+const actividades = [
+  {
+    titulo: 'TRACES, campamento artístico en La Rioja',
+    cuando: 'Primavera de 2027',
+    texto: 'Seis días en un entorno rural riojano con 18 jóvenes de 18 a 25 años de los tres países. Escritura creativa, danza, entrevistas a vecinos y vecinas, una ruta guiada por el territorio y, para cerrar, una actuación colectiva abierta al pueblo. Lo organiza Horizonte Rioja.',
+  },
+  {
+    titulo: 'DESIRES, campamento artístico en Italia',
+    cuando: 'Verano de 2027',
+    texto: 'El segundo campamento se celebra en Casanova Staffora, un pueblo del Oltrepò Pavese (Lombardía), con Anellodebole. Trabajo teatral en el propio pueblo y con su gente, que termina también en una actuación pública.',
+  },
+  {
+    titulo: 'Visita de estudio en Portugal',
+    cuando: 'Agosto-septiembre de 2027',
+    texto: 'Trabajadores juveniles de las tres entidades visitan Pinhel, en una de las zonas menos pobladas de Europa, para conocer cómo trabaja Hawk Stars con la juventud rural.',
+  },
+  {
+    titulo: 'Roots and Routes, talleres en los pueblos',
+    cuando: 'Otoño de 2027',
+    texto: 'Cada entidad organiza al menos tres talleres en su territorio que juntan a jóvenes y mayores, usando el arte como puente entre generaciones.',
+  },
+];
+
+const socias = [
+  { nombre: 'Asociación Juvenil Horizonte Rioja', pais: 'España', papel: 'Coordina el proyecto' },
+  { nombre: 'Anellodebole A.P.S.', pais: 'Italia', papel: 'Colectivo de teatro, música y documental con base en pueblos de Parma y del Oltrepò Pavese' },
+  { nombre: 'Hawk Stars NGO', pais: 'Portugal', papel: 'Educación no formal con juventud rural en Pinhel, Beiras e Serra da Estrela' },
+];
+---
+
+<BaseLayout title="Rural Identities" description="Rural Identities es un proyecto Erasmus+ KA210 coordinado por Horizonte Rioja que usa el arte para conectar a la juventud con la identidad de los pueblos de La Rioja, Italia y Portugal.">
+  <section class="page-hero">
+    <div class="container">
+      <a class="back" href={`${base}/proyectos/`}>← Proyectos</a>
+      <span class="eyebrow">Erasmus+ KA210-YOU · Coordinado por Horizonte Rioja</span>
+      <h1>Rural Identities</h1>
+      <p class="lead">Arte y juventud para reconectar con la identidad de los pueblos.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <dl class="facts">
+        <div><dt>Duración</dt><dd>31/12/2026 - 30/12/2027</dd></div>
+        <div><dt>Países</dt><dd>España, Italia y Portugal</dd></div>
+        <div><dt>Participantes</dt><dd>Jóvenes de 18 a 25 años</dd></div>
+        <div><dt>Financiación</dt><dd>60.000 € (Erasmus+, INJUVE)</dd></div>
+      </dl>
+
+      <div class="prose">
+        <h2>Por qué este proyecto</h2>
+        <p>
+          Los pueblos ocupan la mayor parte de Europa pero cada vez vive menos gente joven en ellos. Quien se queda
+          tiene menos acceso a actividades culturales y educativas, y quien se va pierde poco a poco el vínculo con
+          su territorio. Rural Identities usa las artes escénicas y la educación no formal para dar la vuelta a eso,
+          con la gente joven como protagonista de la vida cultural de sus pueblos.
+        </p>
+
+        <h2>Qué queremos conseguir</h2>
+        <ul>
+          <li>Acercar a jóvenes de tres países a los paisajes, la historia y las tradiciones del mundo rural a través del arte.</li>
+          <li>Que la juventud que vive en pueblos acceda a actividades culturales internacionales que de otro modo le quedarían lejos.</li>
+          <li>Crear diálogo entre generaciones para que el patrimonio rural se transmita.</li>
+          <li>Intercambiar métodos de educación no formal entre las entidades socias.</li>
+          <li>Reforzar la capacidad de tres entidades jóvenes para trabajar juntas en Europa.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Actividades</h2>
+      <div class="grid grid-2">
+        {actividades.map((a) => (
+          <article class="card">
+            <p class="cuando">{a.cuando}</p>
+            <h3>{a.titulo}</h3>
+            <p>{a.texto}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <h2>Entidades socias</h2>
+      <ul class="socias">
+        {socias.map((s) => <li><strong>{s.nombre}</strong> ({s.pais}). {s.papel}.</li>)}
+      </ul>
+
+      <h2>Qué quedará</h2>
+      <p>
+        Un vídeo del proyecto, los diarios de los dos campamentos escritos por las propias personas participantes,
+        las grabaciones de las dos actuaciones y los informes de los talleres. Todo se publicará en abierto en la
+        plataforma de resultados de Erasmus+ para que otras entidades puedan repetir el formato.
+      </p>
+
+      <h2>¿Quieres participar?</h2>
+      <p>
+        Cada entidad elegirá a seis jóvenes por convocatoria abierta, valorando la motivación y dando prioridad a
+        quienes viven en zonas rurales o tienen menos oportunidades. Publicaremos la convocatoria aquí. Si quieres
+        que te avisemos, escríbenos a <a href={`mailto:${ORG.email}`}>{ORG.email}</a>.
+      </p>
+
+      <EUDisclaimer />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .back { display: block; width: fit-content; margin-bottom: 16px; font-weight: 600; text-decoration: none; }
+  .facts {
+    display: grid; gap: 16px; margin: 0 0 48px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .facts div { background: var(--blanco); border: 1px solid var(--borde); border-radius: var(--radio); padding: 18px 20px; }
+  .facts dt { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--vina); }
+  .facts dd { margin: 4px 0 0; font-family: var(--serif); font-size: 1.15rem; }
+  .cuando { color: var(--vina); font-weight: 600; font-size: .9rem; margin-bottom: .3em; }
+  .socias { list-style: none; padding: 0; }
+  .socias li { padding: 12px 0; border-bottom: 1px solid var(--borde); }
+</style>

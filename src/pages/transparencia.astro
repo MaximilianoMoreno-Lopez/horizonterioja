@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ORG, JUNTA } from '../lib/site.js';
+
+const mailto = `mailto:${ORG.email}`;
+---
+
+<BaseLayout title="Transparencia" description="Datos registrales, junta directiva y documentación de la Asociación Juvenil Horizonte Rioja.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Transparencia</span>
+      <h1>Cuentas claras</h1>
+      <p class="lead">Quiénes somos legalmente, quién nos representa y cómo nos organizamos.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <h2>Datos de la entidad</h2>
+      <table class="data-table">
+        <tbody>
+          <tr><th scope="row">Denominación</th><td>{ORG.nombreLegal}</td></tr>
+          <tr><th scope="row">Naturaleza</th><td>Asociación juvenil sin ánimo de lucro (Ley Orgánica 1/2002 y Real Decreto 397/1988)</td></tr>
+          <tr><th scope="row">NIF</th><td>{ORG.nif}</td></tr>
+          <tr><th scope="row">Inscripción</th><td>{ORG.registro}, desde el {ORG.fechaInscripcion}</td></tr>
+          <tr><th scope="row">Código Erasmus+ (OID)</th><td>{ORG.oid}</td></tr>
+          <tr><th scope="row">Domicilio social</th><td>{ORG.ciudad}</td></tr>
+          <tr><th scope="row">Ámbito</th><td>Comunidad Autónoma de La Rioja, con actuaciones en el ámbito nacional, europeo e internacional</td></tr>
+          <tr><th scope="row">Contacto</th><td>{ORG.email}</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Junta directiva</h2>
+      <table class="data-table">
+        <tbody>
+          {JUNTA.map((p) => <tr><th scope="row">{p.cargo}</th><td>{p.nombre}</td></tr>)}
+        </tbody>
+      </table>
+
+      <h2>Gobierno de la asociación</h2>
+      <p>
+        El órgano supremo es la Asamblea General, formada por todas las personas socias, que se reúne al menos una
+        vez al año y decide por mayoría. La Junta Directiva gestiona la asociación entre asambleas.
+      </p>
+
+      <h2>Documentación</h2>
+      <p>
+        La asociación inició su actividad en diciembre de 2025. Publicaremos aquí los estatutos, la memoria de
+        actividades y las cuentas del primer ejercicio en cuanto los apruebe la Asamblea General. Mientras tanto,
+        puedes pedir cualquier documento escribiendo a <a href={mailto}>{ORG.email}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

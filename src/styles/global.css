@@ -1,0 +1,142 @@
+@import '@fontsource-variable/dm-sans';
+@import '@fontsource-variable/fraunces';
+
+:root {
+  --vino: #6b1f3a;
+  --vino-oscuro: #4a1428;
+  --vina: #3f6b3a;
+  --vina-claro: #e8efe3;
+  --horizonte: #e0a43a;
+  --crema: #faf6ef;
+  --arena: #f1e8da;
+  --tinta: #1f1a17;
+  --gris: #5e5650;
+  --borde: #e2d8ca;
+  --blanco: #ffffff;
+
+  --serif: 'Fraunces Variable', Georgia, serif;
+  --sans: 'DM Sans Variable', system-ui, sans-serif;
+
+  --radio: 14px;
+  --sombra: 0 1px 2px rgba(31, 26, 23, .06), 0 6px 20px rgba(31, 26, 23, .06);
+  --ancho: 1120px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--tinta);
+  background: var(--crema);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--vino); text-underline-offset: 3px; }
+a:hover { color: var(--vino-oscuro); }
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  line-height: 1.15;
+  color: var(--tinta);
+  margin: 0 0 .6em;
+  font-weight: 600;
+}
+h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); letter-spacing: -.01em; }
+h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); }
+h3 { font-size: 1.25rem; }
+
+p { margin: 0 0 1em; }
+
+.container {
+  width: 100%;
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+@media (min-width: 720px) { .container { padding: 0 28px; } }
+
+.section { padding: 72px 0; }
+.section-alt { background: var(--arena); }
+
+.eyebrow {
+  display: inline-block;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--vina);
+  margin-bottom: .8rem;
+}
+
+.lead { font-size: 1.2rem; color: var(--gris); max-width: 62ch; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .8rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .2s, color .2s, transform .2s;
+}
+.btn-primary { background: var(--vino); color: var(--blanco); }
+.btn-primary:hover { background: var(--vino-oscuro); color: var(--blanco); transform: translateY(-1px); }
+.btn-ghost { border: 1.5px solid currentColor; color: var(--vino); }
+.btn-ghost:hover { background: var(--vino); color: var(--blanco); }
+
+.grid { display: grid; gap: 20px; }
+@media (min-width: 720px) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+.card {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 28px;
+  box-shadow: var(--sombra);
+}
+.card h3 { margin-bottom: .4em; }
+.card p:last-child { margin-bottom: 0; }
+
+.icon {
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  background: var(--vina-claro);
+  color: var(--vina);
+  margin-bottom: 16px;
+}
+
+.page-hero {
+  padding: 64px 0 48px;
+  background: linear-gradient(180deg, var(--arena) 0%, var(--crema) 100%);
+  border-bottom: 1px solid var(--borde);
+}
+.page-hero h1 { margin-bottom: .3em; }
+
+.prose { max-width: 70ch; }
+.container.prose { max-width: var(--ancho); }
+.container.prose > * { max-width: 70ch; }
+.prose h2 { margin-top: 1.6em; }
+.prose ul { padding-left: 1.2em; }
+.prose li { margin-bottom: .4em; }
+
+.data-table { width: 100%; border-collapse: collapse; background: var(--blanco); border-radius: var(--radio); overflow: hidden; border: 1px solid var(--borde); }
+.data-table th, .data-table td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--borde); vertical-align: top; }
+.data-table tr:last-child th, .data-table tr:last-child td { border-bottom: 0; }
+.data-table th { width: 38%; font-weight: 600; color: var(--gris); background: var(--crema); }
+
+.skip-link { position: absolute; left: -9999px; top: 8px; }
+.skip-link:focus { left: 8px; z-index: 100; background: var(--blanco); padding: 8px 12px; border-radius: 8px; }
+
+:focus-visible { outline: 3px solid var(--horizonte); outline-offset: 2px; }

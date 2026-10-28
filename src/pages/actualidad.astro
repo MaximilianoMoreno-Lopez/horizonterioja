@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const noticias = (await getCollection('noticias')).sort((a, b) => b.data.date.localeCompare(a.data.date));
+const fecha = (d: string) => new Date(d).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<BaseLayout title="Actualidad" description="Noticias y crónicas de las actividades de Horizonte Rioja.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Actualidad</span>
+      <h1>Lo que vamos haciendo</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        {noticias.map((n) => (
+          <a class="card news-card" href={`${base}/actualidad/${n.id}/`}>
+            <time datetime={n.data.date}>{fecha(n.data.date)}</time>
+            <h3>{n.data.title}</h3>
+            <p>{n.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .news-card { text-decoration: none; color: inherit; transition: transform .2s; }
+  .news-card:hover { transform: translateY(-3px); color: inherit; }
+  .news-card time { font-size: .85rem; color: var(--vina); font-weight: 600; }
+  .news-card h3 { margin-top: .4em; }
+</style>

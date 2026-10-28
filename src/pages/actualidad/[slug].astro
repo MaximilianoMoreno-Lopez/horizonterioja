@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const noticias = await getCollection('noticias');
+  return noticias.map((n) => ({ params: { slug: n.id }, props: { noticia: n } }));
+}
+
+const { noticia } = Astro.props;
+const { Content } = await render(noticia);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fecha = new Date(noticia.data.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<BaseLayout title={noticia.data.title} description={noticia.data.description}>
+  <section class="page-hero">
+    <div class="container prose">
+      <a class="back" href={`${base}/actualidad/`}>← Actualidad</a>
+      <time datetime={noticia.data.date}>{fecha}</time>
+      <h1>{noticia.data.title}</h1>
+      <p class="lead">{noticia.data.description}</p>
+    </div>
+  </section>
+
+  <article class="section">
+    <div class="container prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .back { display: block; width: fit-content; margin-bottom: 16px; font-weight: 600; text-decoration: none; }
+  time { display: block; color: var(--vina); font-weight: 600; margin-bottom: 8px; }
+</style>

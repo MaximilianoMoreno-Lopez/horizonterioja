@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ORG } from '../lib/site.js';
+
+const motivos = [
+  { titulo: 'Quiero participar', texto: 'En una actividad, en un intercambio o como voluntario o voluntaria.' },
+  { titulo: 'Tengo una idea', texto: 'Para tu pueblo, tu centro educativo o tu grupo de amigos.' },
+  { titulo: 'Somos una entidad', texto: 'Ayuntamiento, colegio, asociación u organización europea que quiere colaborar.' },
+];
+---
+
+<BaseLayout title="Contacto" description="Escribe a Horizonte Rioja para participar, proponer una actividad o colaborar con nosotros.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Contacto</span>
+      <h1>Hablemos</h1>
+      <p class="lead">Respondemos todos los correos. Cuéntanos quién eres y qué te gustaría hacer.</p>
+      <a class="btn btn-primary mail" href={`mailto:${ORG.email}`}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        {ORG.email}
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        {motivos.map((m) => (
+          <article class="card">
+            <h3>{m.titulo}</h3>
+            <p>{m.texto}</p>
+          </article>
+        ))}
+      </div>
+      <p class="sede">Sede social en {ORG.ciudad}.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .mail { margin-top: 12px; }
+  .sede { margin-top: 32px; color: var(--gris); }
+</style>

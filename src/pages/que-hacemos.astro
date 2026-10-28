@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ORG } from '../lib/site.js';
+
+const lineas = [
+  {
+    titulo: 'Talleres y charlas en los pueblos',
+    texto: 'Actividades educativas y de sensibilización sobre derechos LGTBIQ+, igualdad de género, inclusión social, migraciones, participación juvenil y valores europeos, pensadas para la realidad de cada municipio.',
+  },
+  {
+    titulo: 'Espacios seguros de diálogo',
+    texto: 'Grupos de conversación, mesas redondas y círculos de reflexión donde la gente joven puede hablar con libertad de lo que le preocupa, sin juicios y con respeto.',
+  },
+  {
+    titulo: 'Movilidad europea',
+    texto: 'Informamos, orientamos y acompañamos a jóvenes del medio rural para que participen en intercambios, cursos de formación y voluntariados de Erasmus+ y del Cuerpo Europeo de Solidaridad.',
+  },
+  {
+    titulo: 'Sostenibilidad y clima',
+    texto: 'Talleres prácticos sobre el uso responsable de los recursos naturales y campañas de sensibilización sobre el cambio climático, desde lo que se vive en el propio territorio.',
+  },
+  {
+    titulo: 'Participación y voluntariado',
+    texto: 'La gente joven no es público, es protagonista. Quien se implica en Horizonte Rioja planifica y lleva adelante actividades, y aprende a organizarse, liderar y trabajar en equipo.',
+  },
+  {
+    titulo: 'Red con entidades locales',
+    texto: 'Colaboramos con colegios, centros de juventud y entidades sociales y ambientales de La Rioja para que las oportunidades lleguen a quien más las necesita.',
+  },
+];
+---
+
+<BaseLayout title="Qué hacemos" description="Talleres en los pueblos, espacios seguros de diálogo, movilidad europea con Erasmus+, sostenibilidad y voluntariado. Así trabaja Horizonte Rioja con la juventud rural.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Qué hacemos</span>
+      <h1>De lo local a lo europeo</h1>
+      <p class="lead">Educación no formal, participación y oportunidades europeas para la juventud de los pueblos de La Rioja.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2">
+        {lineas.map((l, i) => (
+          <article class="card linea">
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{l.titulo}</h3>
+            <p>{l.texto}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container prose">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2>Aprender haciendo</h2>
+      <p>
+        Todo lo que hacemos parte de la educación no formal. Nada de clases magistrales, sino dinámicas en grupo,
+        juegos, debates y proyectos que las propias personas participantes ayudan a diseñar. Creemos que las
+        experiencias internacionales transforman especialmente a quien viene de un pueblo, porque abren la mirada
+        y, a la vez, refuerzan el vínculo con el territorio.
+      </p>
+      <p>
+        ¿Quieres organizar algo con nosotros en tu municipio o en tu centro? Escríbenos a
+        <a href={`mailto:${ORG.email}`}>{ORG.email}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .num { font-family: var(--serif); font-size: 2rem; color: var(--horizonte); font-weight: 600; display: block; margin-bottom: 8px; }
+</style>

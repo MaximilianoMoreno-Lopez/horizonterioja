@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { JUNTA } from '../lib/site.js';
+
+// Fines del artículo 6 de los estatutos, resumidos.
+const fines = [
+  'Desarrollar y promocionar la actividad cultural local.',
+  'Promover la interculturalidad y la diversidad europea.',
+  'Impulsar la cooperación internacional para el desarrollo cívico y social.',
+  'Promover la igualdad de oportunidades entre mujeres y hombres y la presencia de las mujeres en la vida pública.',
+  'Favorecer la integración de los colectivos en situación de vulnerabilidad.',
+  'Empoderar a la juventud para que participe en la vida económica, social, cultural y política.',
+  'Actuar como agentes de cambio por la justicia social y ecológica.',
+  'Promover y activar la vida rural como parte esencial de nuestro territorio.',
+  'Promover el asociacionismo LGTBIQ+ y los derechos del colectivo.',
+  'Fomentar la vida sana, la cultura y el deporte.',
+];
+
+const iniciales = (n: string) => n.split(' ').slice(0, 2).map((p) => p[0]).join('');
+---
+
+<BaseLayout title="Quiénes somos" description="Horizonte Rioja nace a finales de 2025 de la mano de jóvenes con raíces en los pueblos de La Rioja. Conoce nuestra historia, nuestros fines y a la junta directiva.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">Quiénes somos</span>
+      <h1>Gente de pueblo con ganas de abrir horizontes</h1>
+      <p class="lead">Una asociación juvenil joven, hecha por personas que conocen de primera mano lo que supone crecer en el medio rural.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <h2>Nuestra historia</h2>
+      <p>
+        Horizonte Rioja nace a finales de 2025 en La Rioja. Quienes la fundamos venimos de pueblos y compartimos
+        una idea, que la juventud rural no tiene por qué elegir entre quedarse y crecer. Varios de nosotros
+        hemos participado durante años en intercambios, formaciones y proyectos Erasmus+ con otras asociaciones,
+        y queríamos que esas oportunidades llegaran también a los pueblos riojanos.
+      </p>
+      <p>
+        Somos una asociación sin ánimo de lucro, democrática y dirigida por jóvenes. Trabajamos sobre todo en La
+        Rioja, aunque nada nos impide hacerlo en el resto de España y en Europa, y de hecho ahí está buena parte
+        de lo que queremos traer.
+      </p>
+
+      <h2>Nuestra misión</h2>
+      <p>
+        Que la gente joven del medio rural tenga acceso a información, formación y experiencias que le permitan
+        desarrollarse personal y socialmente, sentirse parte de su pueblo y también de un espacio europeo
+        compartido.
+      </p>
+
+      <h2>Nuestros fines</h2>
+      <p>Así los recogen nuestros estatutos.</p>
+      <ul>
+        {fines.map((f) => <li>{f}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <span class="eyebrow">Equipo</span>
+      <h2>Junta directiva</h2>
+      <div class="grid grid-3 team">
+        {JUNTA.map((p) => (
+          <article class="card person">
+            <div class="avatar" aria-hidden="true">{iniciales(p.nombre)}</div>
+            <h3>{p.nombre}</h3>
+            <p class="cargo">{p.cargo}</p>
+            <p>{p.bio}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .team { margin-top: 24px; }
+  .avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--vino); color: #fff;
+    font-family: var(--serif); font-size: 1.3rem; font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .person h3 { margin-bottom: .1em; }
+  .cargo { color: var(--vina); font-weight: 600; font-size: .95rem; }
+</style>

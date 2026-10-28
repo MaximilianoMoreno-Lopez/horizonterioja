@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout title="Página no encontrada">
+  <section class="section">
+    <div class="container prose">
+      <span class="eyebrow">Error 404</span>
+      <h1>Por aquí no hay camino</h1>
+      <p class="lead">La página que buscas no existe o ha cambiado de sitio.</p>
+      <a class="btn btn-primary" href={`${base}/`}>Volver al inicio</a>
+    </div>
+  </section>
+</BaseLayout>
