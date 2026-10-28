@@ -1,0 +1,63 @@
+---
+// Tarjeta de noticia con una cubierta ilustrada generada (no hay fotos). La variante sale del índice.
+import Arrow from './Arrow.astro';
+
+interface Props {
+  href: string;
+  titulo: string;
+  descripcion: string;
+  fecha: string;      // AAAA-MM-DD
+  indice?: number;
+}
+const { href, titulo, descripcion, fecha, indice = 0 } = Astro.props;
+const fechaTxt = new Date(fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const variantes = [
+  { fondo: '#f1e8da', sierra: '#dcc3b8', loma: '#3f6b3a', delante: '#2f5229', sol: 300 },
+  { fondo: '#e8efe3', sierra: '#c9d6bd', loma: '#6b1f3a', delante: '#4a1428', sol: 250 },
+  { fondo: '#f6e3bd', sierra: '#ead2a6', loma: '#3f6b3a', delante: '#2f5229', sol: 205 },
+];
+const v = variantes[indice % variantes.length];
+---
+
+<a class="card card-link news-card reveal" href={href}>
+  <div class="news-cubierta" aria-hidden="true">
+    <svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMax slice" focusable="false">
+      <rect width="400" height="150" fill={v.fondo} />
+      <circle cx={v.sol} cy="96" r="40" fill="#e0a43a" opacity=".16" />
+      <circle cx={v.sol} cy="96" r="26" fill="#e0a43a" />
+      <path d="M0 102 L50 92 L92 98 L140 80 L190 94 L240 76 L290 92 L340 82 L400 90 V150 H0Z" fill={v.sierra} />
+      <path d="M0 118 C90 98 180 102 260 114 S360 108 400 104 V150 H0Z" fill={v.loma} />
+      <path d="M0 134 C110 124 230 128 400 126 V150 H0Z" fill={v.delante} />
+    </svg>
+    <time class="news-fecha" datetime={fecha}>{fechaTxt}</time>
+  </div>
+  <div class="news-body">
+    <h3>{titulo}</h3>
+    <p>{descripcion}</p>
+    <span class="leer">Leer la noticia <Arrow /></span>
+  </div>
+</a>
+
+<style>
+  .news-card { padding: 0; overflow: hidden; }
+  .news-cubierta { position: relative; aspect-ratio: 400 / 150; max-height: 170px; overflow: hidden; }
+  .news-cubierta svg { width: 100%; height: 100%; display: block; transition: transform .6s var(--ease); }
+  .news-card:hover .news-cubierta svg { transform: scale(1.04); }
+  .news-fecha {
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    background: var(--crema);
+    color: var(--oro-texto);
+    font-family: var(--serif);
+    font-size: .88rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(74, 20, 40, .08);
+  }
+  .news-body { padding: clamp(22px, 3vw, 28px); display: flex; flex-direction: column; flex: 1; }
+  .news-body h3 { font-size: 1.32rem; }
+  .news-body p { color: var(--gris); }
+</style>

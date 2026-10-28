@@ -1,51 +1,68 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { ORG } from '../lib/site.js';
+import PageHero from '../components/PageHero.astro';
 ---
 
 <BaseLayout title="Política de privacidad">
-  <section class="page-hero">
-    <div class="container">
-      <h1>Política de privacidad</h1>
-    </div>
-  </section>
+  <PageHero eyebrow="Legal" title="Política de privacidad" motivo="horizonte" compacta />
 
   <section class="section">
-    <div class="container prose">
-      <h2>Responsable del tratamiento</h2>
-      <p>
-        {ORG.nombreLegal}, NIF {ORG.nif}, con domicilio social en {ORG.ciudad}. Contacto
-        <a href={`mailto:${ORG.email}`}>{ORG.email}</a>.
-      </p>
+    <div class="container editorial">
+      <div class="ed-row">
+        <h2>Responsable del tratamiento</h2>
+        <div class="ed-body">
+          <p>
+            {ORG.nombreLegal}, NIF {ORG.nif}, con domicilio social en {ORG.ciudad}. Contacto
+            <a href={`mailto:${ORG.email}`}>{ORG.email}</a>.
+          </p>
+        </div>
+      </div>
 
-      <h2>Qué datos tratamos</h2>
-      <p>
-        Esta web no tiene formularios, no pide registro y no usa cookies propias ni de análisis. Solo tratamos los
-        datos que nos envías por correo electrónico, que usamos para responderte y, si participas en nuestras
-        actividades, para gestionar tu participación.
-      </p>
+      <div class="ed-row">
+        <h2>Qué datos tratamos</h2>
+        <div class="ed-body">
+          <p>
+            Esta web no tiene formularios, no pide registro y no usa cookies propias ni de análisis. Solo tratamos los
+            datos que nos envías por correo electrónico, que usamos para responderte y, si participas en nuestras
+            actividades, para gestionar tu participación.
+          </p>
+        </div>
+      </div>
 
-      <h2>Base legal y conservación</h2>
-      <p>
-        Tratamos tus datos con tu consentimiento, al escribirnos, o porque son necesarios para gestionar la
-        actividad en la que participas. Los guardamos el tiempo necesario para ello y para cumplir nuestras
-        obligaciones legales, y no los cedemos a terceros salvo obligación legal o cuando sea imprescindible para
-        la actividad, por ejemplo a la entidad que coordina un proyecto Erasmus+, y siempre informándote antes.
-      </p>
+      <div class="ed-row">
+        <h2>Base legal y conservación</h2>
+        <div class="ed-body">
+          <p>
+            Tratamos tus datos con tu consentimiento, al escribirnos, o porque son necesarios para gestionar la
+            actividad en la que participas. Los guardamos el tiempo necesario para ello y para cumplir nuestras
+            obligaciones legales, y no los cedemos a terceros salvo obligación legal o cuando sea imprescindible para
+            la actividad, por ejemplo a la entidad que coordina un proyecto Erasmus+, y siempre informándote antes.
+          </p>
+        </div>
+      </div>
 
-      <h2>Tus derechos</h2>
-      <p>
-        Puedes pedir el acceso, la rectificación, la supresión, la limitación o la portabilidad de tus datos, u
-        oponerte a su tratamiento, escribiendo a <a href={`mailto:${ORG.email}`}>{ORG.email}</a>. Si crees que no
-        hemos atendido bien tu petición, puedes reclamar ante la Agencia Española de Protección de Datos
-        (<a href="https://www.aepd.es" rel="noopener">aepd.es</a>).
-      </p>
+      <div class="ed-row">
+        <h2>Tus derechos</h2>
+        <div class="ed-body">
+          <p>
+            Puedes pedir el acceso, la rectificación, la supresión, la limitación o la portabilidad de tus datos, u
+            oponerte a su tratamiento, escribiendo a <a href={`mailto:${ORG.email}`}>{ORG.email}</a>. Si crees que no
+            hemos atendido bien tu petición, puedes reclamar ante la Agencia Española de Protección de Datos
+            (<a href="https://www.aepd.es" rel="noopener">aepd.es</a>).
+          </p>
+        </div>
+      </div>
 
-      <h2>Alojamiento</h2>
-      <p>
-        La web está alojada en GitHub Pages (GitHub, Inc.), que puede registrar datos técnicos de las visitas, como
-        la dirección IP, por motivos de seguridad.
-      </p>
+      <div class="ed-row">
+        <h2>Alojamiento</h2>
+        <div class="ed-body">
+          <p>
+            La web está alojada en GitHub Pages (GitHub, Inc.), que puede registrar datos técnicos de las visitas, como
+            la dirección IP, por motivos de seguridad.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>

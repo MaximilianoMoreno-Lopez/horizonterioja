@@ -1,0 +1,104 @@
+---
+// Cabecera de las páginas interiores. Texto a la izquierda y, abajo, un paisaje tonal
+// (sierra, lomas, viña y sol) que cambia ligeramente según el motivo de cada página.
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  motivo?: 'pueblo' | 'camino' | 'vinedo' | 'sol' | 'horizonte';
+  compacta?: boolean;
+}
+const { eyebrow, title, lead, motivo = 'horizonte', compacta = false } = Astro.props;
+
+const soles = {
+  pueblo: { x: 1120, y: 106, r: 30 },
+  camino: { x: 1300, y: 98, r: 30 },
+  vinedo: { x: 1130, y: 106, r: 32 },
+  sol: { x: 1185, y: 110, r: 40 },
+  horizonte: { x: 1268, y: 104, r: 28 },
+};
+const sol = soles[motivo];
+const hileras = motivo === 'vinedo' || motivo === 'pueblo' || motivo === 'camino';
+const filas = motivo === 'vinedo' ? [0, 7, 14, 21] : [0, 8];
+// En el viñedo la loma verde sube para que quepan las cuatro hileras por encima de la franja crema final.
+const sube = motivo === 'vinedo' ? 18 : 0;
+---
+
+<section class:list={['page-hero', `ph-${motivo}`, { 'page-hero--compacta': compacta }]}>
+  <div class="container ph-inner">
+    <slot name="antes" />
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1>{title}</h1>
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
+
+  <svg class="ph-paisaje" viewBox="0 0 1440 260" preserveAspectRatio="xMaxYMax slice" aria-hidden="true" focusable="false">
+    <g class="ph-sol">
+      {motivo === 'sol' && (
+        <>
+          <circle cx={sol.x} cy={sol.y} r={sol.r + 46} fill="none" stroke="#e0a43a" stroke-opacity=".16" stroke-width="1.5" />
+          <circle cx={sol.x} cy={sol.y} r={sol.r + 24} fill="none" stroke="#e0a43a" stroke-opacity=".3" stroke-width="1.5" />
+        </>
+      )}
+      <circle cx={sol.x} cy={sol.y} r={sol.r + 12} fill="#e0a43a" opacity=".14" />
+      <circle cx={sol.x} cy={sol.y} r={sol.r} fill="#e0a43a" />
+    </g>
+
+    <path d="M0 212 C140 206 260 210 380 202 L470 196 L560 200 L660 186 L740 190 L820 168 L890 176 L960 146 L1020 158 L1090 122 L1150 134 L1220 104 L1290 124 L1360 112 L1440 122 V260 H0Z" fill="#ead9cc" />
+    <path d="M0 228 C160 220 300 224 440 216 L540 210 L640 214 L740 200 L830 206 L920 188 L990 196 L1070 174 L1140 184 L1220 166 L1300 180 L1380 170 L1440 176 V260 H0Z" fill="#dcc3b8" />
+    <path d={`M0 ${240 - sube} C220 ${222 - sube} 440 ${226 - sube} 660 ${236 - sube} S1100 ${214 - sube} 1440 ${228 - sube} V260 H0Z`} fill="#cdd8c1" />
+
+    {hileras && (
+      <g fill="none" stroke="#93a986" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0.5 9">
+        {filas.map((f) => { const dy = f - sube; return <path d={`M0 ${246 + dy} C220 ${228 + dy} 440 ${232 + dy} 660 ${242 + dy} S1100 ${220 + dy} 1440 ${234 + dy}`} />; })}
+      </g>
+    )}
+
+    {motivo === 'pueblo' && (
+      <g class="ph-pueblo" fill="#8a5a6a" transform="translate(110 0)">
+        <path d="M968 226 v-12 l9 -7 l9 7 v12z" />
+        <path d="M990 226 v-16 l11 -8 l11 8 v16z" />
+        <path d="M1016 226 v-30 l5 -6 l5 6 v30z" />
+        <path d="M1021 186 v-6" stroke="#8a5a6a" stroke-width="1.5" />
+        <path d="M1030 226 v-11 l8 -6 l8 6 v11z" />
+        <path d="M1050 226 v-14 l10 -7 l10 7 v14z" />
+        <path d="M1074 226 v-9 l7 -5 l7 5 v9z" />
+      </g>
+    )}
+
+    {motivo === 'camino' && (
+      <path d="M560 252 C700 246 760 232 860 228 S1060 214 1150 196 S1260 140 1290 118" fill="none" stroke="#6b1f3a" stroke-opacity=".45" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 8" vector-effect="non-scaling-stroke" />
+    )}
+
+    <path d="M0 252 C320 240 640 244 900 250 S1300 238 1440 246 V260 H0Z" fill="#faf6ef" />
+  </svg>
+</section>
+
+<style>
+  .page-hero {
+    /* El tope deja casi la proporción 1440:260 para que el sol no se recorte en pantallas anchas */
+    --ph-h: clamp(110px, 19vw, 420px);
+    padding: clamp(44px, 7vw, 96px) 0 calc(var(--ph-h) + 4px);
+  }
+  .page-hero--compacta { --ph-h: clamp(80px, 11vw, 160px); padding-top: clamp(40px, 5vw, 72px); }
+  .page-hero--compacta .ph-sol { display: none; }
+  .ph-inner { position: relative; z-index: 1; }
+  .ph-paisaje {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    width: 100%;
+    height: var(--ph-h);
+    display: block;
+    pointer-events: none;
+  }
+  @media (min-width: 960px) {
+    .page-hero { padding-bottom: calc(var(--ph-h) * .5 + 8px); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .ph-sol { animation: ph-amanecer 1.2s var(--ease) .15s both; }
+    @keyframes ph-amanecer { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+  }
+</style>

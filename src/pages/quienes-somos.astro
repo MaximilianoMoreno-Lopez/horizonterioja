@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { JUNTA } from '../lib/site.js';
+import PageHero from '../components/PageHero.astro';
 
 // Fines del artículo 6 de los estatutos, resumidos.
 const fines = [
@@ -16,56 +17,75 @@ const fines = [
   'Fomentar la vida sana, la cultura y el deporte.',
 ];
 
+const tonos = ['', 'avatar-vina', 'avatar-oro'];
 const iniciales = (n: string) => n.split(' ').slice(0, 2).map((p) => p[0]).join('');
 ---
 
 <BaseLayout title="Quiénes somos" description="Horizonte Rioja nace a finales de 2025 de la mano de jóvenes con raíces en los pueblos de La Rioja. Conoce nuestra historia, nuestros fines y a la junta directiva.">
-  <section class="page-hero">
-    <div class="container">
-      <span class="eyebrow">Quiénes somos</span>
-      <h1>Gente de pueblo con ganas de abrir horizontes</h1>
-      <p class="lead">Una asociación juvenil joven, hecha por personas que conocen de primera mano lo que supone crecer en el medio rural.</p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="Quiénes somos"
+    title="Gente de pueblo con ganas de abrir horizontes"
+    lead="Una asociación juvenil joven, hecha por personas que conocen de primera mano lo que supone crecer en el medio rural."
+    motivo="pueblo"
+  />
 
   <section class="section">
-    <div class="container prose">
-      <h2>Nuestra historia</h2>
-      <p>
-        Horizonte Rioja nace a finales de 2025 en La Rioja. Quienes la fundamos venimos de pueblos y compartimos
-        una idea, que la juventud rural no tiene por qué elegir entre quedarse y crecer. Varios de nosotros
-        hemos participado durante años en intercambios, formaciones y proyectos Erasmus+ con otras asociaciones,
-        y queríamos que esas oportunidades llegaran también a los pueblos riojanos.
-      </p>
-      <p>
-        Somos una asociación sin ánimo de lucro, democrática y dirigida por jóvenes. Trabajamos sobre todo en La
-        Rioja, aunque nada nos impide hacerlo en el resto de España y en Europa, y de hecho ahí está buena parte
-        de lo que queremos traer.
-      </p>
+    <div class="container editorial">
+      <div class="ed-row">
+        <h2>Nuestra historia</h2>
+        <div class="ed-body">
+          <p class="entradilla">
+            Horizonte Rioja nace a finales de 2025 en La Rioja. Quienes la fundamos venimos de pueblos y compartimos
+            una idea, que la juventud rural no tiene por qué elegir entre quedarse y crecer.
+          </p>
+          <p>
+            Varios de nosotros hemos participado durante años en intercambios, formaciones y proyectos Erasmus+ con
+            otras asociaciones, y queríamos que esas oportunidades llegaran también a los pueblos riojanos.
+          </p>
+          <p>
+            Somos una asociación sin ánimo de lucro, democrática y dirigida por jóvenes. Trabajamos sobre todo en La
+            Rioja, aunque nada nos impide hacerlo en el resto de España y en Europa, y de hecho ahí está buena parte
+            de lo que queremos traer.
+          </p>
+        </div>
+      </div>
 
-      <h2>Nuestra misión</h2>
-      <p>
-        Que la gente joven del medio rural tenga acceso a información, formación y experiencias que le permitan
-        desarrollarse personal y socialmente, sentirse parte de su pueblo y también de un espacio europeo
-        compartido.
-      </p>
+      <div class="ed-row">
+        <h2>Nuestra misión</h2>
+        <div class="ed-body">
+          <p class="mision">
+            Que la gente joven del medio rural tenga acceso a información, formación y experiencias que le permitan
+            desarrollarse personal y socialmente, sentirse parte de su pueblo y también de un espacio europeo
+            compartido.
+          </p>
+        </div>
+      </div>
 
-      <h2>Nuestros fines</h2>
-      <p>Así los recogen nuestros estatutos.</p>
-      <ul>
-        {fines.map((f) => <li>{f}</li>)}
-      </ul>
+      <div class="ed-row">
+        <h2>Nuestros fines</h2>
+        <div class="ed-body ed-body--ancho">
+          <p>Así los recogen nuestros estatutos.</p>
+          <ol class="fines">
+            {fines.map((f) => <li>{f}</li>)}
+          </ol>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section section-alt lomas">
     <div class="container">
-      <span class="eyebrow">Equipo</span>
-      <h2>Junta directiva</h2>
-      <div class="grid grid-3 team">
-        {JUNTA.map((p) => (
-          <article class="card person">
-            <div class="avatar" aria-hidden="true">{iniciales(p.nombre)}</div>
+      <div class="section-head">
+        <p class="eyebrow">Equipo</p>
+        <h2>Junta directiva</h2>
+      </div>
+      <div class="grid grid-3">
+        {JUNTA.map((p, i) => (
+          <article class="card person reveal">
+            <div class:list={['avatar', tonos[i % tonos.length]]} aria-hidden="true">
+              <svg class="avatar-arco" viewBox="0 0 88 88" focusable="false"><path d="M6.8 65.5 A43 43 0 0 0 84.4 29.3" /></svg>
+              <span>{iniciales(p.nombre)}</span>
+            </div>
             <h3>{p.nombre}</h3>
             <p class="cargo">{p.cargo}</p>
             <p>{p.bio}</p>
@@ -77,14 +97,67 @@ const iniciales = (n: string) => n.split(' ').slice(0, 2).map((p) => p[0]).join(
 </BaseLayout>
 
 <style>
-  .team { margin-top: 24px; }
+  .entradilla { font-size: 1.2rem; line-height: 1.55; color: var(--tinta); }
+  .mision {
+    font-family: var(--serif);
+    font-optical-sizing: auto;
+    font-size: clamp(1.35rem, 1.1rem + 1vw, 1.75rem);
+    line-height: 1.38;
+    font-weight: 400;
+    color: var(--vino);
+    letter-spacing: -.01em;
+    padding-left: 24px;
+    border-left: 3px solid var(--horizonte);
+  }
+  .ed-body--ancho { max-width: none; }
+  .fines {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    counter-reset: fin;
+    display: grid;
+    gap: 0 40px;
+  }
+  @media (min-width: 640px) { .fines { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .fines li {
+    counter-increment: fin;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    align-items: baseline;
+    padding: 16px 0;
+    border-top: 1px solid var(--borde);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  .fines li::before {
+    content: counter(fin, decimal-leading-zero);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--oro-texto);
+  }
+
   .avatar {
-    width: 64px; height: 64px; border-radius: 50%;
+    position: relative;
+    width: 76px; height: 76px; border-radius: 50%;
     display: grid; place-items: center;
     background: var(--vino); color: #fff;
-    font-family: var(--serif); font-size: 1.3rem; font-weight: 600;
-    margin-bottom: 16px;
+    font-family: var(--serif); font-size: 1.45rem; font-weight: 500; letter-spacing: .02em;
+    margin: 6px 0 22px 6px;
   }
-  .person h3 { margin-bottom: .1em; }
-  .cargo { color: var(--vina); font-weight: 600; font-size: .95rem; }
+  .avatar-vina { background: var(--vina); }
+  .avatar-oro { background: var(--oro-texto); }
+  .avatar-arco { position: absolute; left: -6px; top: -6px; width: 88px; height: 88px; overflow: visible; }
+  .avatar-arco path { fill: none; stroke: var(--horizonte); stroke-width: 2; stroke-linecap: round; }
+  .person h3 { margin-bottom: .15em; }
+  .cargo { color: var(--vina); font-weight: 700; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+  @media (max-width: 719px) {
+    .person { display: grid; grid-template-columns: 64px 1fr; column-gap: 18px; align-items: center; }
+    .avatar { grid-row: 1 / span 2; width: 64px; height: 64px; font-size: 1.25rem; margin: 6px 0 6px 0; }
+    .avatar-arco { width: 76px; height: 76px; }
+    .person h3 { align-self: end; }
+    .person .cargo { align-self: start; margin-bottom: 0; }
+    .person p:not(.cargo) { grid-column: 1 / -1; margin-top: 16px; }
+  }
 </style>

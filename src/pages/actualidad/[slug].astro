@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Arrow from '../../components/Arrow.astro';
+import EUDisclaimer from '../../components/EUDisclaimer.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -14,23 +17,31 @@ const fecha = new Date(noticia.data.date).toLocaleDateString('es-ES', { day: 'nu
 ---
 
 <BaseLayout title={noticia.data.title} description={noticia.data.description}>
-  <section class="page-hero">
-    <div class="container prose">
-      <a class="back" href={`${base}/actualidad/`}>← Actualidad</a>
-      <time datetime={noticia.data.date}>{fecha}</time>
-      <h1>{noticia.data.title}</h1>
-      <p class="lead">{noticia.data.description}</p>
-    </div>
-  </section>
+  <PageHero title={noticia.data.title} lead={noticia.data.description} motivo="horizonte" compacta>
+    <Fragment slot="antes">
+      <a class="back" href={`${base}/actualidad/`}><Arrow size={16} /> Actualidad</a>
+      <p class="eyebrow"><time datetime={noticia.data.date}>{fecha}</time></p>
+    </Fragment>
+  </PageHero>
 
-  <article class="section">
-    <div class="container prose">
-      <Content />
+  <article class="section articulo">
+    <div class="container">
+      <div class="prose cuerpo">
+        <Content />
+        {noticia.data.erasmus && <EUDisclaimer />}
+      </div>
+      <div class="prose cuerpo pie">
+        <a class="link-flecha" href={`${base}/actualidad/`}>Ver todas las noticias <Arrow /></a>
+      </div>
     </div>
   </article>
 </BaseLayout>
 
 <style>
-  .back { display: block; width: fit-content; margin-bottom: 16px; font-weight: 600; text-decoration: none; }
-  time { display: block; color: var(--vina); font-weight: 600; margin-bottom: 8px; }
+  .articulo { padding-top: clamp(40px, 5vw, 72px); }
+  .cuerpo { font-size: 1.1rem; line-height: 1.72; }
+  .cuerpo > :global(p:first-child) { font-size: 1.25rem; line-height: 1.6; color: var(--tinta); }
+  .cuerpo :global(h2) { font-size: clamp(1.5rem, 1.2rem + 1vw, 1.9rem); }
+  .cuerpo :global(em) { color: var(--gris); }
+  .pie { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--borde); }
 </style>

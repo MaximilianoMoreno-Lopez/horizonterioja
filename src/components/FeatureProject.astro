@@ -1,0 +1,76 @@
+---
+// Pieza destacada de un proyecto: ilustración propia sobre granate y texto a la derecha.
+// Las tres lomas representan los tres territorios del proyecto, sin banderas.
+import Arrow from './Arrow.astro';
+
+interface Props {
+  href: string;
+  chip: string;
+  titulo: string;
+  fechas?: string;
+  texto: string;
+  cta?: string;
+  nivel?: 'h2' | 'h3';
+}
+const { href, chip, titulo, fechas, texto, cta = 'Ver el proyecto', nivel = 'h2' } = Astro.props;
+const Titulo = nivel;
+---
+
+<a class="feature card-link" href={href}>
+  <div class="feature-arte" aria-hidden="true">
+    <svg viewBox="0 0 480 360" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <rect width="480" height="360" fill="#6b1f3a" />
+      <circle cx="330" cy="178" r="150" fill="#e0a43a" opacity=".07" />
+      <circle cx="330" cy="178" r="72" fill="none" stroke="#e0a43a" stroke-opacity=".35" stroke-width="1.5" />
+      <circle class="feature-sol" cx="330" cy="178" r="48" fill="#e0a43a" />
+      <g fill="none" stroke="#f3d9e1" stroke-linecap="round" stroke-width="1.6" opacity=".6">
+        <path d="M24 168 C150 168 270 156 390 86" />
+        <path d="M120 140 C220 138 300 124 388 90" />
+      </g>
+      <path d="M0 246 C80 206 170 200 262 228 S410 240 480 214 V360 H0Z" fill="#8a3355" />
+      <path d="M0 284 C110 250 232 256 342 276 S440 272 480 262 V360 H0Z" fill="#3f6b3a" />
+      <g fill="none" stroke="#2f5229" stroke-width="4" stroke-linecap="round" stroke-dasharray="0.5 10">
+        <path d="M0 296 C110 262 232 268 342 288 S440 284 480 274" />
+        <path d="M0 308 C110 274 232 280 342 300 S440 296 480 286" />
+      </g>
+      <path d="M0 318 C130 300 270 306 480 312 V360 H0Z" fill="#2f5229" />
+    </svg>
+  </div>
+  <div class="feature-body">
+    <span class="chip chip-oro">{chip}</span>
+    <Titulo class="feature-titulo">{titulo}</Titulo>
+    {fechas && <p class="feature-fechas tnum">{fechas}</p>}
+    <p>{texto}</p>
+    <span class="leer">{cta} <Arrow /></span>
+  </div>
+</a>
+
+<style>
+  .feature {
+    display: grid;
+    padding: 0;
+    overflow: hidden;
+    border-radius: var(--r-lg);
+    background: var(--papel);
+    border: 1px solid var(--borde);
+  }
+  .feature-arte { position: relative; min-height: 200px; background: var(--vino); }
+  .feature-arte svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .feature-body { padding: clamp(26px, 4vw, 48px); display: flex; flex-direction: column; align-items: flex-start; }
+  .feature-titulo {
+    font-size: clamp(2rem, 1.5rem + 1.8vw, 2.8rem);
+    font-weight: 560;
+    letter-spacing: -.02em;
+    line-height: 1.05;
+    margin: 18px 0 10px;
+  }
+  .feature-fechas { color: var(--vina); font-weight: 600; font-size: .95rem; margin-bottom: .7em; }
+  .feature-body > p:not(.feature-fechas) { font-size: 1.05rem; color: var(--gris); max-width: 52ch; }
+  .feature .leer { padding-top: 8px; }
+  .feature-sol { transition: transform .6s var(--ease); transform-box: fill-box; transform-origin: center; }
+  .feature:hover .feature-sol { transform: translateY(-6px); }
+  @media (min-width: 820px) {
+    .feature { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+    .feature-arte { min-height: 320px; }
+  }
+</style>

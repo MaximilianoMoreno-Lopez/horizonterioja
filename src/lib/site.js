@@ -21,7 +21,7 @@ export const JUNTA = [
   {
     nombre: 'Gonzalo Martínez Cortés',
     cargo: 'Secretaría',
-    bio: 'Publicista y técnico en turismo. Voluntario en Cruz Roja y en el Banco de Alimentos de La Rioja, y participante en varios proyectos Erasmus+.',
+    bio: 'Publicista y técnico en turismo. Voluntario en Cruz Roja y en el Banco de Alimentos de La Rioja, y participante en varios proyectos Erasmus+.',
   },
   {
     nombre: 'Maximiliano Moreno López',

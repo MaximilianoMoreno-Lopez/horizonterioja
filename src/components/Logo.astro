@@ -1,35 +1,72 @@
 ---
-// Versión vectorial del logo de Horizonte Rioja (las líneas del horizonte sobre el nombre).
-// El original está en el PIF de 2026, en relieve sobre fondo gris.
+// Logo de Horizonte Rioja, opción "A · Amanecer entre viñas" (Logo/ en Drive):
+// sol de arcos sobre el horizonte con surcos de viña, y "horizonte / RIOJA" en Bricolage Grotesque.
+// Versión horizontal para cabecera y pie. Colores exactos del diseño original.
 interface Props {
-  claro?: boolean; // para fondos oscuros
+  claro?: boolean; // para fondos oscuros: el arco exterior, el horizonte y los surcos pasan a claro
 }
 const { claro = false } = Astro.props;
 ---
 
 <span class:list={['logo', { claro }]}>
-  <svg class="swoosh" viewBox="0 0 310 32" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M17 28 C90 28 170 24 266 3" />
-    <path d="M78 20 C150 18 210 12 265 4" />
-    <path class="sol" d="M164 29 C220 22 262 12 288 13 C305 14 308 24 297 30" />
+  <svg class="marca" viewBox="20 40 260 168" aria-hidden="true" focusable="false">
+    <g fill="none" stroke-width="8" stroke-linecap="round">
+      <path class="exterior" d="M 70 130 A 80 80 0 0 1 230 130" />
+      <path d="M 83 130 A 67 67 0 0 1 217 130" stroke="#B83A44" />
+      <path d="M 96 130 A 54 54 0 0 1 204 130" stroke="#E07A3B" />
+      <path d="M 109 130 A 41 41 0 0 1 191 130" stroke="#E9B342" />
+      <path d="M 122 130 A 28 28 0 0 1 178 130" stroke="#6E9A4D" />
+    </g>
+    <path d="M 135 130 A 15 15 0 0 1 165 130 Z" fill="#3C6A93" />
+    <line class="linea" x1="28" y1="136" x2="272" y2="136" stroke-width="4" stroke-linecap="round" />
+    <g class="surcos" stroke-width="5" stroke-linecap="round">
+      <line x1="138" y1="146" x2="62" y2="200" />
+      <line x1="146" y1="146" x2="120" y2="200" />
+      <line x1="154" y1="146" x2="180" y2="200" />
+      <line x1="162" y1="146" x2="238" y2="200" />
+    </g>
   </svg>
-  <span class="word">Horizonte Rioja</span>
+  <span class="texto">
+    <span class="word">horizonte</span>
+    <span class="rioja">RIOJA</span>
+  </span>
 </span>
 
 <style>
-  .logo { display: inline-grid; line-height: 1; }
-  .swoosh { width: 104%; height: .85em; overflow: visible; margin-bottom: -.1em; }
-  .swoosh path {
-    fill: none;
-    stroke: var(--vino);
-    stroke-width: 1.6px;
-    stroke-linecap: round;
-    vector-effect: non-scaling-stroke;
+  .logo {
+    --l-exterior: #5B1A33;
+    --l-linea: #2A1A22;
+    --l-word: #2A1A22;
+    --l-rioja: #5B1A33;
+    display: inline-flex;
+    align-items: center;
+    gap: .4em;
+    line-height: 1;
   }
-  .swoosh .sol { stroke: var(--horizonte); stroke-width: 2px; }
-  .word { font-family: var(--serif); font-weight: 500; letter-spacing: .01em; color: var(--tinta); }
-
-  .claro .swoosh path { stroke: #f3d9e1; }
-  .claro .swoosh .sol { stroke: var(--horizonte); }
-  .claro .word { color: #fff; }
+  .claro {
+    --l-exterior: var(--rosa-linea);
+    --l-linea: #fff;
+    --l-word: #fff;
+    --l-rioja: var(--horizonte);
+  }
+  .marca { height: 1.65em; width: auto; flex: none; overflow: visible; }
+  .exterior { stroke: var(--l-exterior); }
+  .linea { stroke: var(--l-linea); }
+  .surcos { stroke: var(--l-exterior); }
+  .texto { display: grid; justify-items: center; }
+  .word {
+    font-family: 'Bricolage Grotesque Variable', 'Helvetica Neue', Helvetica, sans-serif;
+    font-weight: 800;
+    letter-spacing: -.03em;
+    color: var(--l-word);
+  }
+  .rioja {
+    font-family: 'Bricolage Grotesque Variable', 'Helvetica Neue', Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: .31em;
+    letter-spacing: .62em;
+    padding-left: .62em;
+    margin-top: .3em;
+    color: var(--l-rioja);
+  }
 </style>

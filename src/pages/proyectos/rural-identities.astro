@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import EUDisclaimer from '../../components/EUDisclaimer.astro';
+import PageHero from '../../components/PageHero.astro';
+import Arrow from '../../components/Arrow.astro';
 import { ORG } from '../../lib/site.js';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -30,103 +32,243 @@ const actividades = [
 ];
 
 const socias = [
-  { nombre: 'Asociación Juvenil Horizonte Rioja', pais: 'España', papel: 'Coordina el proyecto' },
-  { nombre: 'Anellodebole A.P.S.', pais: 'Italia', papel: 'Colectivo de teatro, música y documental con base en pueblos de Parma y del Oltrepò Pavese' },
-  { nombre: 'Hawk Stars NGO', pais: 'Portugal', papel: 'Educación no formal con juventud rural en Pinhel, Beiras e Serra da Estrela' },
+  { nombre: 'Asociación Juvenil Horizonte Rioja', pais: 'España', papel: 'Coordina el proyecto', coordina: true },
+  { nombre: 'Anellodebole A.P.S.', pais: 'Italia', papel: 'Colectivo de teatro, música y documental con base en pueblos de Parma y del Oltrepò Pavese', coordina: false },
+  { nombre: 'Hawk Stars NGO', pais: 'Portugal', papel: 'Educación no formal con juventud rural en Pinhel, Beiras e Serra da Estrela', coordina: false },
 ];
 ---
 
 <BaseLayout title="Rural Identities" description="Rural Identities es un proyecto Erasmus+ KA210 coordinado por Horizonte Rioja que usa el arte para conectar a la juventud con la identidad de los pueblos de La Rioja, Italia y Portugal.">
-  <section class="page-hero">
+  <PageHero
+    eyebrow="Erasmus+ KA210⁠-⁠YOU · Coordinado por Horizonte Rioja"
+    title="Rural Identities"
+    lead="Arte y juventud para reconectar con la identidad de los pueblos."
+    motivo="vinedo"
+  >
+    <a slot="antes" class="back" href={`${base}/proyectos/`}><Arrow size={16} /> Proyectos</a>
+  </PageHero>
+
+  <section class="section ri-intro">
     <div class="container">
-      <a class="back" href={`${base}/proyectos/`}>← Proyectos</a>
-      <span class="eyebrow">Erasmus+ KA210-YOU · Coordinado por Horizonte Rioja</span>
-      <h1>Rural Identities</h1>
-      <p class="lead">Arte y juventud para reconectar con la identidad de los pueblos.</p>
+      <figure class="ruta">
+        <svg viewBox="0 56 960 154" role="img" aria-label="La Rioja, el Oltrepò Pavese y Pinhel unidos por una misma línea de horizonte">
+          <path d="M170 116 Q330 30 490 108 Q680 26 862 124" fill="none" stroke="#e0a43a" stroke-width="2.5" stroke-linecap="round" />
+          <path d="M8 200 C60 150 118 116 170 116 S292 158 336 200Z" fill="#3f6b3a" />
+          <g fill="none" stroke="#2f5229" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="0.5 9">
+            <path d="M40 186 C80 150 130 132 170 132 S270 162 304 190" />
+            <path d="M62 196 C96 166 136 150 170 150 S256 174 286 198" />
+          </g>
+          <path d="M336 200 C384 144 440 108 490 108 S566 140 598 166 C620 148 650 138 680 146 S726 178 744 200Z" fill="#dcc3b8" stroke="#6b1f3a" stroke-opacity=".5" stroke-width="1.5" />
+          <path d="M744 200 C760 164 790 124 830 124 L900 124 C926 136 942 168 954 200Z" fill="#e6d6bf" />
+          <g fill="#c9b8a6">
+            <ellipse cx="808" cy="168" rx="16" ry="10" />
+            <ellipse cx="828" cy="174" rx="10" ry="7" />
+            <ellipse cx="880" cy="160" rx="13" ry="8" />
+            <ellipse cx="860" cy="182" rx="18" ry="9" />
+          </g>
+          <path d="M0 200 H960" stroke="#d4c1ad" stroke-width="1.5" />
+          <g fill="#6b1f3a" stroke="#faf6ef" stroke-width="3">
+            <circle cx="170" cy="116" r="7" />
+            <circle cx="490" cy="108" r="7" />
+            <circle cx="862" cy="124" r="7" />
+          </g>
+        </svg>
+        <figcaption class="ruta-lugares">
+          <span><strong>La Rioja</strong> España</span>
+          <span><strong>Oltrepò Pavese</strong> Italia</span>
+          <span><strong>Pinhel</strong> Portugal</span>
+        </figcaption>
+      </figure>
+
+      <dl class="facts">
+        <div><dt>Duración</dt><dd class="tnum">Del <span class="nw">31/12/2026</span> al <span class="nw">30/12/2027</span></dd></div>
+        <div><dt>Países</dt><dd>España, Italia y Portugal</dd></div>
+        <div><dt>Participantes</dt><dd>Jóvenes de 18 a 25 años</dd></div>
+        <div><dt>Financiación</dt><dd class="tnum">60.000&nbsp;€<small>Erasmus+, INJUVE</small></dd></div>
+      </dl>
+      <p class="codigo">Código del proyecto <span class="tnum">2026-1-ES02-KA210-YOU-000458045</span></p>
+
+      <div class="editorial ri-editorial">
+        <div class="ed-row">
+          <h2>Por qué este proyecto</h2>
+          <div class="ed-body">
+            <p>
+              Los pueblos ocupan la mayor parte de Europa pero cada vez vive menos gente joven en ellos. Quien se queda
+              tiene menos acceso a actividades culturales y educativas, y quien se va pierde poco a poco el vínculo con
+              su territorio. Rural Identities usa las artes escénicas y la educación no formal para dar la vuelta a eso,
+              con la gente joven como protagonista de la vida cultural de sus pueblos.
+            </p>
+          </div>
+        </div>
+        <div class="ed-row">
+          <h2>Qué queremos conseguir</h2>
+          <div class="ed-body prose">
+            <ul>
+              <li>Acercar a jóvenes de tres países a los paisajes, la historia y las tradiciones del mundo rural a través del arte.</li>
+              <li>Que la juventud que vive en pueblos acceda a actividades culturales internacionales que de otro modo le quedarían lejos.</li>
+              <li>Crear diálogo entre generaciones para que el patrimonio rural se transmita.</li>
+              <li>Intercambiar métodos de educación no formal entre las entidades socias.</li>
+              <li>Reforzar la capacidad de tres entidades jóvenes para trabajar juntas en Europa.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt lomas">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">El año 2027</p>
+        <h2>Actividades</h2>
+      </div>
+      <ol class="timeline">
+        {actividades.map((a) => (
+          <li class="hito reveal">
+            <p class="cuando">{a.cuando}</p>
+            <h3>{a.titulo}</h3>
+            <p>{a.texto}</p>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <dl class="facts">
-        <div><dt>Duración</dt><dd>31/12/2026 - 30/12/2027</dd></div>
-        <div><dt>Países</dt><dd>España, Italia y Portugal</dd></div>
-        <div><dt>Participantes</dt><dd>Jóvenes de 18 a 25 años</dd></div>
-        <div><dt>Financiación</dt><dd>60.000 € (Erasmus+, INJUVE)</dd></div>
-      </dl>
-
-      <div class="prose">
-        <h2>Por qué este proyecto</h2>
-        <p>
-          Los pueblos ocupan la mayor parte de Europa pero cada vez vive menos gente joven en ellos. Quien se queda
-          tiene menos acceso a actividades culturales y educativas, y quien se va pierde poco a poco el vínculo con
-          su territorio. Rural Identities usa las artes escénicas y la educación no formal para dar la vuelta a eso,
-          con la gente joven como protagonista de la vida cultural de sus pueblos.
-        </p>
-
-        <h2>Qué queremos conseguir</h2>
-        <ul>
-          <li>Acercar a jóvenes de tres países a los paisajes, la historia y las tradiciones del mundo rural a través del arte.</li>
-          <li>Que la juventud que vive en pueblos acceda a actividades culturales internacionales que de otro modo le quedarían lejos.</li>
-          <li>Crear diálogo entre generaciones para que el patrimonio rural se transmita.</li>
-          <li>Intercambiar métodos de educación no formal entre las entidades socias.</li>
-          <li>Reforzar la capacidad de tres entidades jóvenes para trabajar juntas en Europa.</li>
-        </ul>
+      <div class="section-head">
+        <p class="eyebrow">Tres territorios</p>
+        <h2>Entidades socias</h2>
       </div>
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container">
-      <h2>Actividades</h2>
-      <div class="grid grid-2">
-        {actividades.map((a) => (
-          <article class="card">
-            <p class="cuando">{a.cuando}</p>
-            <h3>{a.titulo}</h3>
-            <p>{a.texto}</p>
+      <div class="grid grid-3">
+        {socias.map((s) => (
+          <article class:list={['card', 'socia', 'reveal', { coordina: s.coordina }]}>
+            <span class="chip">{s.pais}</span>
+            <h3>{s.nombre}</h3>
+            <p>{s.papel}.</p>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container prose">
-      <h2>Entidades socias</h2>
-      <ul class="socias">
-        {socias.map((s) => <li><strong>{s.nombre}</strong> ({s.pais}). {s.papel}.</li>)}
-      </ul>
-
-      <h2>Qué quedará</h2>
-      <p>
-        Un vídeo del proyecto, los diarios de los dos campamentos escritos por las propias personas participantes,
-        las grabaciones de las dos actuaciones y los informes de los talleres. Todo se publicará en abierto en la
-        plataforma de resultados de Erasmus+ para que otras entidades puedan repetir el formato.
-      </p>
-
-      <h2>¿Quieres participar?</h2>
-      <p>
-        Cada entidad elegirá a seis jóvenes por convocatoria abierta, valorando la motivación y dando prioridad a
-        quienes viven en zonas rurales o tienen menos oportunidades. Publicaremos la convocatoria aquí. Si quieres
-        que te avisemos, escríbenos a <a href={`mailto:${ORG.email}`}>{ORG.email}</a>.
-      </p>
-
-      <EUDisclaimer />
+  <section class="section section-alt lomas">
+    <div class="container editorial">
+      <div class="ed-row">
+        <h2>Qué quedará</h2>
+        <div class="ed-body">
+          <p>
+            Un vídeo del proyecto, los diarios de los dos campamentos escritos por las propias personas participantes,
+            las grabaciones de las dos actuaciones y los informes de los talleres. Todo se publicará en abierto en la
+            plataforma de resultados de Erasmus+ para que otras entidades puedan repetir el formato.
+          </p>
+        </div>
+      </div>
+      <div class="ed-row">
+        <h2>¿Quieres participar?</h2>
+        <div class="ed-body">
+          <p>
+            Cada entidad elegirá a seis jóvenes por convocatoria abierta, valorando la motivación y dando prioridad a
+            quienes viven en zonas rurales o tienen menos oportunidades. Publicaremos la convocatoria aquí. Si quieres
+            que te avisemos, escríbenos.
+          </p>
+          <a class="btn btn-primary" href={`mailto:${ORG.email}`}>{ORG.email} <Arrow /></a>
+          <EUDisclaimer />
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .back { display: block; width: fit-content; margin-bottom: 16px; font-weight: 600; text-decoration: none; }
-  .facts {
-    display: grid; gap: 16px; margin: 0 0 48px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  .ruta { max-width: 940px; margin: 0 auto clamp(40px, 5vw, 64px); }
+  .ruta svg { display: block; width: 100%; height: auto; }
+  .ri-intro { padding-top: clamp(20px, 3vw, 40px); }
+  /* Cada etiqueta se centra en la x de su punto en el dibujo (170, 490 y 862 de 960) */
+  .ruta-lugares {
+    display: grid;
+    margin-top: 14px;
+    font-size: .74rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gris);
   }
-  .facts div { background: var(--blanco); border: 1px solid var(--borde); border-radius: var(--radio); padding: 18px 20px; }
-  .facts dt { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--vina); }
-  .facts dd { margin: 4px 0 0; font-family: var(--serif); font-size: 1.15rem; }
-  .cuando { color: var(--vina); font-weight: 600; font-size: .9rem; margin-bottom: .3em; }
-  .socias { list-style: none; padding: 0; }
-  .socias li { padding: 12px 0; border-bottom: 1px solid var(--borde); }
+  .ruta-lugares span {
+    grid-area: 1 / 1;
+    justify-self: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-align: center;
+    white-space: nowrap;
+    transform: translateX(-50%);
+  }
+  .ruta-lugares span:nth-child(1) { margin-left: 17.71%; }
+  .ruta-lugares span:nth-child(2) { margin-left: 51.04%; }
+  .ruta-lugares span:nth-child(3) { margin-left: 89.79%; }
+  .ruta-lugares strong { font-family: var(--serif); text-transform: none; letter-spacing: 0; font-size: 1.05rem; font-weight: 600; color: var(--tinta); }
+  @media (min-width: 720px) { .ruta-lugares strong { font-size: 1.2rem; } }
+  @media (max-width: 559px) {
+    /* En móvil Pinhel se apoya en el borde derecho para no salirse */
+    .ruta-lugares span:nth-child(3) { margin-left: 0; justify-self: end; transform: none; }
+  }
+  @media (max-width: 399px) {
+    .ruta-lugares { font-size: .68rem; letter-spacing: .08em; }
+    .ruta-lugares strong { font-size: .95rem; }
+  }
+
+  .codigo { margin: -8px 0 clamp(56px, 7vw, 96px); font-size: .9rem; color: var(--gris); overflow-wrap: anywhere; }
+  .codigo span { font-weight: 600; color: var(--tinta); margin-left: .4em; }
+  .facts {
+    display: grid;
+    gap: 16px;
+    margin: 0 0 24px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  }
+  .facts div {
+    background: var(--papel);
+    border: 1px solid var(--borde);
+    border-top: 3px solid var(--vina);
+    border-radius: var(--r-sm);
+    padding: 18px 20px 20px;
+  }
+  .facts dt { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--vina); }
+  .facts dd { margin: 6px 0 0; font-family: var(--serif); font-optical-sizing: auto; font-size: 1.22rem; line-height: 1.3; font-weight: 500; }
+  .facts small { display: block; margin-top: 4px; font-family: var(--sans); font-size: .85rem; font-weight: 400; color: var(--gris); }
+
+  .timeline { list-style: none; margin: 0; padding: 0 0 0 34px; position: relative; display: grid; gap: 40px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 8px; bottom: 8px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(var(--horizonte), var(--vina));
+  }
+  .hito { position: relative; }
+  .hito::before {
+    content: '';
+    position: absolute;
+    left: -34px; top: 4px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--crema);
+    border: 3px solid var(--horizonte);
+  }
+  .cuando { margin: 0 0 6px; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--oro-texto); }
+  .hito h3 { margin-bottom: .45em; }
+  .hito p:last-child { margin: 0; font-size: 1rem; color: var(--gris); max-width: 60ch; }
+  @media (min-width: 1000px) {
+    .timeline { padding: 0; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
+    .timeline::before { left: 0; right: 0; top: 7px; bottom: auto; width: auto; height: 2px; background: linear-gradient(90deg, var(--horizonte), var(--vina)); }
+    .hito { padding-top: 40px; }
+    .hito::before { left: 0; top: 0; }
+  }
+
+  .socia { border-top: 3px solid var(--vina); }
+  .socia.coordina { border-top-color: var(--vino); }
+  .socia h3 { margin-top: 16px; }
+  .socia p { color: var(--gris); }
+  .ri-editorial .ed-body > p { font-size: 1.08rem; }
 </style>

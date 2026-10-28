@@ -15,8 +15,13 @@ internos llevan el prefijo a mano (`/horizonterioja/...`), así que hay que camb
 - Nunca publicar DNI, teléfonos ni domicilios particulares. El domicilio social es una vivienda,
   por eso la web solo dice "Logroño (La Rioja)".
 - Rural Identities (KA210-YOU, ronda 1 de 2026, 60.000 EUR, 31/12/2026-30/12/2027), socias
-  Anellodebole (IT) y Hawk Stars NGO (PT). El número de proyecto definitivo aún no está en la web.
+  Anellodebole (IT) y Hawk Stars NGO (PT). Código de proyecto 2026-1-ES02-KA210-YOU-000458045 (convenio de subvención).
 - Todo lo financiado por Erasmus+ lleva el aviso `EUDisclaimer`. Falta el emblema oficial de la UE.
+
+## Logo
+Opción "A · Amanecer entre viñas" (zip Logo en Drive): sol de arcos de colores sobre el horizonte con
+surcos, y "horizonte / RIOJA" en Bricolage Grotesque 800/600. Vector en `src/components/Logo.astro`
+(colores exactos #5B1A33, #B83A44, #E07A3B, #E9B342, #6E9A4D, #3C6A93, #2A1A22). No sustituirlo.
 
 ## Estilo de los textos
 Sin guiones largos, sin emojis decorativos y sin abusar de los dos puntos. Español cercano.

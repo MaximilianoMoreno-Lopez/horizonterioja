@@ -2,6 +2,7 @@
 title: "Nuestro primer proyecto europeo, concedido"
 date: "2026-10-28"
 description: "Erasmus+ financia Rural Identities, un proyecto de arte y juventud rural que coordinamos con entidades de Italia y Portugal. Arranca el 31 de diciembre."
+erasmus: true
 ---
 
 Tenemos buenas noticias. La Agencia Nacional Española de la Juventud (INJUVE) ha aprobado **Rural Identities**, el primer proyecto europeo que coordina Horizonte Rioja. Es una asociación a pequeña escala de Erasmus+ (KA210-YOU) con una financiación de **60.000 euros** y se desarrollará entre el 31 de diciembre de 2026 y el 30 de diciembre de 2027.
@@ -23,4 +24,3 @@ Lo hacemos junto a dos entidades que trabajan en el medio rural como nosotros. *
 
 Toda la información está en la [página del proyecto](/horizonterioja/proyectos/rural-identities/). Cuando abramos la convocatoria para participar en los campamentos, la publicaremos aquí.
 
-*Cofinanciado por la Unión Europea. Las opiniones y puntos de vista expresados solo comprometen a su(s) autor(es) y no reflejan necesariamente los de la Unión Europea o los de la Agencia Nacional Española de la Juventud (INJUVE). Ni la Unión Europea ni la autoridad otorgante pueden ser consideradas responsables de ellos.*

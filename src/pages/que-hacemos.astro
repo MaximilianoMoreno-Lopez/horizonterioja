@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { ORG } from '../lib/site.js';
+import PageHero from '../components/PageHero.astro';
+import Arrow from '../components/Arrow.astro';
 
 const lineas = [
   {
@@ -31,46 +33,91 @@ const lineas = [
 ---
 
 <BaseLayout title="Qué hacemos" description="Talleres en los pueblos, espacios seguros de diálogo, movilidad europea con Erasmus+, sostenibilidad y voluntariado. Así trabaja Horizonte Rioja con la juventud rural.">
-  <section class="page-hero">
-    <div class="container">
-      <span class="eyebrow">Qué hacemos</span>
-      <h1>De lo local a lo europeo</h1>
-      <p class="lead">Educación no formal, participación y oportunidades europeas para la juventud de los pueblos de La Rioja.</p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="Qué hacemos"
+    title="De lo local a lo europeo"
+    lead="Educación no formal, participación y oportunidades europeas para la juventud de los pueblos de La Rioja."
+    motivo="camino"
+  />
 
   <section class="section">
     <div class="container">
-      <div class="grid grid-2">
+      <div class="section-head">
+        <p class="eyebrow">Líneas de trabajo</p>
+        <h2>Seis maneras de abrir camino</h2>
+      </div>
+      <ol class="lineas grid grid-3">
         {lineas.map((l, i) => (
-          <article class="card linea">
-            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+          <li class="card linea reveal">
+            <span class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <h3>{l.titulo}</h3>
             <p>{l.texto}</p>
-          </article>
+          </li>
         ))}
-      </div>
+      </ol>
     </div>
   </section>
 
-  <section class="section section-alt">
-    <div class="container prose">
-      <span class="eyebrow">Cómo trabajamos</span>
-      <h2>Aprender haciendo</h2>
-      <p>
-        Todo lo que hacemos parte de la educación no formal. Nada de clases magistrales, sino dinámicas en grupo,
-        juegos, debates y proyectos que las propias personas participantes ayudan a diseñar. Creemos que las
-        experiencias internacionales transforman especialmente a quien viene de un pueblo, porque abren la mirada
-        y, a la vez, refuerzan el vínculo con el territorio.
-      </p>
-      <p>
-        ¿Quieres organizar algo con nosotros en tu municipio o en tu centro? Escríbenos a
-        <a href={`mailto:${ORG.email}`}>{ORG.email}</a>.
-      </p>
+  <section class="section section-alt lomas">
+    <div class="container como">
+      <div>
+        <p class="eyebrow">Cómo trabajamos</p>
+        <h2>Aprender haciendo</h2>
+      </div>
+      <div class="como-texto">
+        <p>
+          Todo lo que hacemos parte de la educación no formal. Nada de clases magistrales, sino dinámicas en grupo,
+          juegos, debates y proyectos que las propias personas participantes ayudan a diseñar. Creemos que las
+          experiencias internacionales transforman especialmente a quien viene de un pueblo, porque abren la mirada
+          y, a la vez, refuerzan el vínculo con el territorio.
+        </p>
+        <p>¿Quieres organizar algo con nosotros en tu municipio o en tu centro? Escríbenos.</p>
+        <a class="btn btn-primary" href={`mailto:${ORG.email}`}>{ORG.email} <Arrow /></a>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .num { font-family: var(--serif); font-size: 2rem; color: var(--horizonte); font-weight: 600; display: block; margin-bottom: 8px; }
+  .lineas { list-style: none; padding: 0; margin: 0; }
+  .linea { overflow: hidden; }
+  .num {
+    display: block;
+    font-family: var(--serif);
+    font-optical-sizing: auto;
+    font-size: 2.9rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1;
+    color: var(--oro-texto);
+    letter-spacing: -.02em;
+    margin-bottom: 18px;
+  }
+  .num::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 3px;
+    margin-top: 14px;
+    border-radius: 2px;
+    background: var(--horizonte);
+  }
+  .linea p { color: var(--gris); }
+  /* Reserva dos líneas de título para que el texto de las tarjetas de una fila arranque a la misma altura */
+  @media (min-width: 720px) { .linea h3 { min-height: 2.5em; } }
+  @media (max-width: 719px) {
+    .lineas { gap: 14px; }
+    .linea { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; align-items: baseline; padding: 20px; }
+    .linea .num { font-size: 1.6rem; margin: 0; }
+    .linea .num::after { display: none; }
+    .linea h3 { margin-bottom: .4em; }
+    .linea p { grid-column: 1 / -1; }
+  }
+
+  .como { display: grid; gap: 24px; }
+  @media (min-width: 880px) { .como { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 72px; } }
+  .como h2 { margin: 0; }
+  .como-texto { max-width: 62ch; }
+  .como-texto p:first-child { font-size: 1.15rem; line-height: 1.6; }
+  .como-texto .btn { margin-top: 8px; }
 </style>

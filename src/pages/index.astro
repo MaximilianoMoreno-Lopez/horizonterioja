@@ -2,32 +2,41 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { ORG } from '../lib/site.js';
+import Arrow from '../components/Arrow.astro';
+import FeatureProject from '../components/FeatureProject.astro';
+import NewsCard from '../components/NewsCard.astro';
+import HorizonLines from '../components/HorizonLines.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const noticias = (await getCollection('noticias'))
   .sort((a, b) => b.data.date.localeCompare(a.data.date))
   .slice(0, 3);
 
+// Pictogramas propios en una rejilla de 32 px, trazo fino y extremos redondeados.
 const ejes = [
   {
     titulo: 'Pueblos con vida',
     texto: 'Vivir en un pueblo no debería significar tener menos oportunidades. Llevamos actividades, información y recursos a los municipios donde casi nunca llegan.',
-    icon: '<path d="M3 21h18M5 21V10l7-5 7 5v11"/><path d="M10 21v-6h4v6"/>',
+    icon: '<path d="M3 27c5-3.5 9-5 13-5s8.5 1.5 13 5"/><path d="M6.5 24.5v-6l4-3 4 3v4.5"/><path d="M17 21.6V11.5l2.75-2.5 2.75 2.5v10.8"/><path d="M19.75 9V5.5M18.3 7h2.9"/><path d="M22.5 19h3.5v4.2"/>',
+    tono: '',
   },
   {
     titulo: 'Diversidad sin miedo',
     texto: 'Creamos espacios seguros para hablar de igualdad de género y derechos LGTBIQ+ en el medio rural, donde todavía cuesta más ser quien eres.',
-    icon: '<path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/>',
+    icon: '<path d="M16 27.5S5 21 4 13.2C3.4 8.5 6.6 5.5 10.2 5.5c2.6 0 4.6 1.6 5.8 3.8 1.2-2.2 3.2-3.8 5.8-3.8 3.6 0 6.8 3 6.2 7.7C27 21 16 27.5 16 27.5z"/><path d="M9 14.5c3 0 6-.6 9.5-3"/>',
+    tono: 'icon-vino',
   },
   {
     titulo: 'Europa al alcance',
     texto: 'Acercamos Erasmus+ y el Cuerpo Europeo de Solidaridad a jóvenes que nunca se habían planteado un intercambio, una formación o un voluntariado fuera.',
-    icon: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+    icon: '<path d="M4 25h24"/><path d="M10.5 25a5.5 5.5 0 0 1 11 0"/><path d="M8 29.5c2-1.6 4.5-2.4 8-2.4s6 .8 8 2.4"/><circle cx="6.8" cy="17" r=".9" fill="currentColor"/><circle cx="10" cy="11.6" r=".9" fill="currentColor"/><circle cx="16" cy="9.4" r=".9" fill="currentColor"/><circle cx="22" cy="11.6" r=".9" fill="currentColor"/><circle cx="25.2" cy="17" r=".9" fill="currentColor"/>',
+    tono: 'icon-oro',
   },
   {
     titulo: 'Territorio sostenible',
     texto: 'El clima y el cuidado del entorno se viven de cerca en el campo. Trabajamos la sostenibilidad desde lo práctico y lo local.',
-    icon: '<path d="M11 20A7 7 0 0 1 4 13c0-5 4-9 16-9 0 12-4 16-9 16z"/><path d="M4 20c4-4 7-6 11-8"/>',
+    icon: '<path d="M16 29V15"/><path d="M16 15c-1.6-4.6-6.4-6-9.6-4 .8 2.8 2.8 4 5 4.2-3.8.8-5.8 3.8-5 6.8 3 0 5.8-2 7-5"/><path d="M16 15c1.6-4.6 6.4-6 9.6-4-.8 2.8-2.8 4-5 4.2 3.8.8 5.8 3.8 5 6.8-3 0-5.8-2-7-5"/><path d="M16 15c-2-4-1.2-8.6 0-11 1.2 2.4 2 7 0 11"/>',
+    tono: '',
   },
 ];
 ---
@@ -35,42 +44,78 @@ const ejes = [
 <BaseLayout>
   <section class="hero">
     <div class="container hero-inner">
-      <span class="eyebrow">Asociación juvenil · La Rioja</span>
+      <p class="eyebrow">Asociación juvenil · La Rioja</p>
       <h1>Juventud rural con <em>horizonte</em> europeo</h1>
       <p class="lead">
         Somos gente joven que ha crecido en pueblos de La Rioja. Trabajamos para que quedarse en el medio rural
         no signifique renunciar a nada, y para que Europa también se viva desde aquí.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href={`${base}/que-hacemos/`}>Qué hacemos</a>
+        <a class="btn btn-primary" href={`${base}/que-hacemos/`}>Qué hacemos <Arrow /></a>
         <a class="btn btn-ghost" href={`${base}/contacto/`}>Escríbenos</a>
       </div>
     </div>
-    <svg class="hero-landscape" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
-      <circle cx="1080" cy="120" r="70" fill="#e0a43a" opacity=".9"/>
-      <path d="M0 150 C240 90 420 110 640 140 S1060 100 1440 130 V220 H0 Z" fill="#3f6b3a"/>
-      <path d="M0 180 C260 150 520 170 760 182 S1180 160 1440 170 V220 H0 Z" fill="#2f5229"/>
+
+    <svg class="hero-landscape" viewBox="0 0 1440 480" preserveAspectRatio="xMaxYMax slice" aria-hidden="true" focusable="false">
+      <defs>
+        <radialGradient id="hero-sol-g" cx=".45" cy=".38" r=".7">
+          <stop offset="0" stop-color="#f4c873" />
+          <stop offset=".65" stop-color="#e0a43a" />
+          <stop offset="1" stop-color="#d4922b" />
+        </radialGradient>
+        <clipPath id="hero-campo">
+          <path d="M0 438 C300 412 560 424 820 436 S1220 416 1440 426 V480 H0Z" />
+        </clipPath>
+      </defs>
+
+      <g class="hero-sol">
+        <circle cx="1090" cy="244" r="150" fill="none" stroke="#e0a43a" stroke-opacity=".16" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+        <circle cx="1090" cy="244" r="108" fill="none" stroke="#e0a43a" stroke-opacity=".3" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+        <circle cx="1090" cy="244" r="86" fill="#e0a43a" opacity=".12" />
+        <circle cx="1090" cy="244" r="70" fill="url(#hero-sol-g)" />
+      </g>
+
+      <path d="M0 330 C120 324 230 326 340 316 L430 306 L520 312 L610 294 L700 298 L780 272 L860 280 L940 246 L1010 262 L1060 252 L1100 258 L1160 222 L1240 196 L1320 214 L1440 200 V480 H0Z" fill="#ecd9c9" />
+      <path d="M0 356 C150 346 290 350 430 340 L540 330 L640 336 L740 318 L830 324 L920 300 L990 308 L1060 290 L1120 300 L1200 280 L1290 292 L1370 282 L1440 288 V480 H0Z" fill="#dcbfb2" />
+
+      <path d="M0 396 C220 360 420 366 640 388 S1080 356 1440 376 V480 H0Z" fill="#3f6b3a" />
+      <g fill="none" stroke="#2f5229" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="0.5 11">
+        <path d="M0 408 C220 372 420 378 640 400 S1080 368 1440 388" />
+        <path d="M0 420 C220 384 420 390 640 412 S1080 380 1440 400" />
+        <path d="M0 432 C220 396 420 402 640 424 S1080 392 1440 412" />
+      </g>
+
+      <path d="M0 438 C300 412 560 424 820 436 S1220 416 1440 426 V480 H0Z" fill="#2f5229" />
+      <g clip-path="url(#hero-campo)" stroke="#4f7f47" stroke-width="2.2" stroke-opacity=".55" stroke-linecap="round">
+        {Array.from({ length: 22 }, (_, i) => -600 + i * 130).map((x) => (
+          <path d={`M${x} 520 L900 372`} />
+        ))}
+      </g>
     </svg>
   </section>
 
-  <section class="container destacado-wrap">
-    <a class="destacado" href={`${base}/proyectos/rural-identities/`}>
-      <span class="tag">Erasmus+ KA210 · Concedido</span>
-      <h2>Rural Identities</h2>
-      <p>Nuestro primer proyecto europeo. Arte y juventud rural en La Rioja, Italia y Portugal durante 2027.</p>
-      <span class="ver">Ver el proyecto →</span>
-    </a>
+  <section class="destacado-wrap">
+    <div class="container">
+      <FeatureProject
+        href={`${base}/proyectos/rural-identities/`}
+        chip="Erasmus+ KA210 · Concedido"
+        titulo="Rural Identities"
+        texto="Nuestro primer proyecto europeo. Arte y juventud rural en La Rioja, Italia y Portugal durante 2027."
+      />
+    </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <span class="eyebrow">Qué nos mueve</span>
-      <h2>Cuatro ejes de trabajo</h2>
-      <div class="grid grid-2 ejes">
+      <div class="section-head">
+        <p class="eyebrow">Qué nos mueve</p>
+        <h2>Cuatro ejes de trabajo</h2>
+      </div>
+      <div class="ejes">
         {ejes.map((e) => (
-          <article class="card">
-            <div class="icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={e.icon} />
+          <article class="eje reveal">
+            <div class:list={['icon', e.tono]}>
+              <svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={e.icon} />
             </div>
             <h3>{e.titulo}</h3>
             <p>{e.texto}</p>
@@ -80,13 +125,15 @@ const ejes = [
     </div>
   </section>
 
-  <section class="section section-alt">
+  <section class="section section-alt lomas">
     <div class="container split">
       <div>
-        <span class="eyebrow">Con quién trabajamos</span>
-        <h2>Jóvenes de 14 a 30 años del medio rural riojano</h2>
+        <p class="eyebrow">Con quién trabajamos</p>
+        <h2 class="quien">
+          Jóvenes de <span class="rango"><span class="num">14</span> a <span class="num">30</span> años</span> del medio rural riojano
+        </h2>
       </div>
-      <div>
+      <div class="split-texto">
         <p>
           Sobre todo con quienes viven en zonas despobladas o con menos recursos, tienen ganas de hacer cosas y
           necesitan a alguien que les oriente, les anime o les ayude a dar el primer paso.
@@ -95,7 +142,7 @@ const ejes = [
           Trabajamos con educación no formal, aprendiendo haciendo, en grupo y desde lo que cada persona trae.
           Y lo hacemos de la mano de colegios, centros de juventud y entidades locales.
         </p>
-        <a href={`${base}/quienes-somos/`}>Conoce a la asociación</a>
+        <a class="link-flecha" href={`${base}/quienes-somos/`}>Conoce a la asociación <Arrow /></a>
       </div>
     </div>
   </section>
@@ -103,74 +150,130 @@ const ejes = [
   {noticias.length > 0 && (
     <section class="section">
       <div class="container">
-        <span class="eyebrow">Actualidad</span>
-        <h2>Lo último</h2>
-        <div class="grid grid-3">
-          {noticias.map((n) => (
-            <a class="card news-card" href={`${base}/actualidad/${n.id}/`}>
-              <time datetime={n.data.date}>{new Date(n.data.date).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}</time>
-              <h3>{n.data.title}</h3>
-              <p>{n.data.description}</p>
-            </a>
+        <div class="section-head section-head--fila">
+          <div>
+            <p class="eyebrow">Actualidad</p>
+            <h2>Lo último</h2>
+          </div>
+          <a class="link-flecha" href={`${base}/actualidad/`}>Todas las noticias <Arrow /></a>
+        </div>
+        <div class:list={['grid', noticias.length < 3 ? 'grid-2' : 'grid-3']}>
+          {noticias.map((n, i) => (
+            <NewsCard href={`${base}/actualidad/${n.id}/`} titulo={n.data.title} descripcion={n.data.description} fecha={n.data.date} indice={i} />
           ))}
         </div>
       </div>
     </section>
   )}
 
-  <section class="section cta">
+  <section class="cta">
+    <HorizonLines class="cta-lineas" tono="claro" />
     <div class="container cta-inner">
+      <p class="eyebrow eyebrow-claro">Participa</p>
       <h2>¿Tienes una idea para tu pueblo?</h2>
       <p>Si eres joven, vives en La Rioja y quieres participar, proponer una actividad o irte de intercambio, escríbenos.</p>
-      <a class="btn btn-primary" href={`mailto:${ORG.email}`}>{ORG.email}</a>
+      <a class="btn btn-oro" href={`mailto:${ORG.email}`}>{ORG.email} <Arrow /></a>
     </div>
   </section>
 </BaseLayout>
 
 <style>
   .hero {
+    /* El tope mantiene casi la proporción 1440:480 del dibujo para que el sol no se recorte en pantallas anchas */
+    --land-h: clamp(240px, 36vw, 720px);
     position: relative;
-    padding: 72px 0 200px;
-    background: linear-gradient(180deg, #f6e7d2 0%, var(--crema) 70%);
     overflow: hidden;
+    padding: clamp(48px, 7vw, 100px) 0 calc(var(--land-h) - 16px);
+    background-color: #f6e6d1;
+    background-image:
+      var(--grano),
+      radial-gradient(ellipse 55% 60% at 78% 78%, rgba(241, 190, 98, .38), transparent 70%),
+      linear-gradient(180deg, #f2dcc1 0%, #f7e9d6 48%, #faf2e6 100%);
+  }
+  @media (min-width: 960px) {
+    .hero { padding-bottom: clamp(220px, 17vw, 320px); }
   }
   .hero-inner { position: relative; z-index: 1; }
-  .hero h1 { max-width: 15ch; }
-  .hero h1 em { font-style: italic; color: var(--vino); }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-  .hero-landscape { position: absolute; left: 0; bottom: 0; width: 100%; height: 180px; }
-
-  .ejes { margin-top: 28px; }
-
-  .destacado-wrap { margin-top: -40px; position: relative; z-index: 2; }
-  .destacado {
-    display: block;
-    background: var(--blanco);
-    border: 1px solid var(--borde);
-    border-left: 6px solid var(--horizonte);
-    border-radius: var(--radio);
-    box-shadow: var(--sombra);
-    padding: 28px;
-    text-decoration: none;
-    color: inherit;
-    transition: transform .2s;
+  .hero h1 { max-width: 13ch; margin-bottom: .4em; }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 440;
+    color: var(--vino);
+    letter-spacing: -.01em;
+    padding-right: .04em;
   }
-  .destacado:hover { transform: translateY(-3px); color: inherit; }
-  .destacado h2 { margin: .3em 0 .3em; }
-  .destacado .tag { font-size: .8rem; font-weight: 600; color: #003399; background: #eef2fb; padding: 4px 10px; border-radius: 999px; }
-  .destacado .ver { font-weight: 600; color: var(--vino); }
+  .hero .lead { max-width: 50ch; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .hero-landscape {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: var(--land-h);
+    display: block;
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-sol { animation: amanecer 1.4s var(--ease) .2s both; }
+    @keyframes amanecer { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+  }
 
-  .split { display: grid; gap: 24px; }
-  @media (min-width: 860px) { .split { grid-template-columns: 1fr 1.2fr; gap: 56px; } }
+  .destacado-wrap { padding-top: clamp(40px, 6vw, 72px); }
 
-  .news-card { text-decoration: none; color: inherit; transition: transform .2s; }
-  .news-card:hover { transform: translateY(-3px); color: inherit; }
-  .news-card time { font-size: .85rem; color: var(--vina); font-weight: 600; }
-  .news-card h3 { margin-top: .4em; }
+  .ejes { display: grid; gap: 40px 32px; }
+  @media (min-width: 640px) { .ejes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1040px) { .ejes { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; } }
+  .eje { border-top: 1.5px solid var(--borde-fuerte); padding-top: 28px; }
+  .eje h3 { margin-bottom: .5em; }
+  .eje p { font-size: 1rem; line-height: 1.62; color: var(--gris); margin: 0; }
+  @media (max-width: 639px) {
+    .ejes { gap: 28px; }
+    .eje { display: grid; grid-template-columns: 48px 1fr; column-gap: 14px; align-items: center; padding-top: 22px; }
+    .eje .icon { width: 48px; height: 48px; margin: 0; }
+    .eje .icon svg { width: 28px; height: 28px; }
+    .eje h3 { margin: 0; }
+    .eje p { grid-column: 1 / -1; margin-top: 12px; }
+  }
 
-  .cta { background: var(--vino); color: #f6e9ed; }
-  .cta h2 { color: #fff; }
-  .cta-inner { text-align: center; max-width: 720px; }
-  .cta .btn-primary { background: var(--horizonte); color: var(--tinta); }
-  .cta .btn-primary:hover { background: #f0b850; color: var(--tinta); }
+  .split { display: grid; gap: 28px; }
+  @media (min-width: 880px) { .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 72px; align-items: center; } }
+  .quien { font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.3rem); line-height: 1.15; margin: 0; }
+  .rango {
+    display: block;
+    margin: .1em 0 .12em;
+    font-size: clamp(3.6rem, 2.4rem + 5vw, 6.4rem);
+    line-height: .95;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--vino);
+    letter-spacing: -.03em;
+  }
+  .rango .num { font-style: normal; font-weight: 380; }
+  .split-texto p { font-size: 1.08rem; }
+  .split-texto .link-flecha { margin-top: 8px; }
+
+  .section-head--fila { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px 32px; max-width: none; }
+
+  .cta {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--vino);
+    background-image: radial-gradient(ellipse 70% 80% at 85% 110%, rgba(224, 164, 58, .22), transparent 60%);
+    color: #f6e9ed;
+    padding: clamp(80px, 10vw, 128px) 0 calc(clamp(80px, 10vw, 128px) + clamp(36px, 4.5vw, 64px));
+    margin-bottom: calc(-1 * clamp(36px, 4.5vw, 64px));
+  }
+  .cta :global(.cta-lineas) {
+    position: absolute;
+    right: clamp(-120px, -6vw, -40px);
+    bottom: -12%;
+    width: clamp(300px, 46vw, 620px);
+    height: auto;
+    opacity: .16;
+    pointer-events: none;
+  }
+  .cta h2 { color: #fff; font-size: clamp(2rem, 1.4rem + 2.2vw, 3.1rem); }
+  .cta-inner { position: relative; text-align: center; max-width: 760px; display: flex; flex-direction: column; align-items: center; }
+  .cta-inner > p:not(.eyebrow) { font-size: 1.15rem; max-width: 54ch; margin-bottom: 1.8em; }
+  .cta :focus-visible { outline-color: #fff; box-shadow: 0 0 0 7px rgba(224, 164, 58, .35); }
 </style>

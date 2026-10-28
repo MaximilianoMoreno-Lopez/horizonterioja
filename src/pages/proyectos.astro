@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import FeatureProject from '../components/FeatureProject.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -7,41 +9,36 @@ const proyectos = [
   {
     slug: 'rural-identities',
     titulo: 'Rural Identities',
-    accion: 'Erasmus+ KA210-YOU · Asociación a pequeña escala',
-    fechas: 'Diciembre 2026 - diciembre 2027',
+    accion: 'Erasmus+ KA210⁠-⁠YOU · Asociación a pequeña escala',
+    fechas: 'De diciembre de 2026 a diciembre de 2027',
     texto: 'Arte, juventud e identidad rural en La Rioja, Italia y Portugal. Dos campamentos artísticos, talleres intergeneracionales en los pueblos y una visita de estudio.',
   },
 ];
 ---
 
 <BaseLayout title="Proyectos" description="Los proyectos europeos de Horizonte Rioja con la juventud rural.">
-  <section class="page-hero">
-    <div class="container">
-      <span class="eyebrow">Proyectos</span>
-      <h1>Lo que tenemos entre manos</h1>
-      <p class="lead">Proyectos europeos que coordinamos o en los que participamos, siempre con la juventud rural en el centro.</p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="Proyectos"
+    title="Lo que tenemos entre manos"
+    lead="Proyectos europeos que coordinamos o en los que participamos, siempre con la juventud rural en el centro."
+    motivo="vinedo"
+  />
 
   <section class="section">
-    <div class="container">
-      <div class="grid grid-2">
-        {proyectos.map((p) => (
-          <a class="card project-card" href={`${base}/proyectos/${p.slug}/`}>
-            <span class="tag">{p.accion}</span>
-            <h3>{p.titulo}</h3>
-            <p class="fechas">{p.fechas}</p>
-            <p>{p.texto}</p>
-          </a>
-        ))}
-      </div>
+    <div class="container proyectos">
+      {proyectos.map((p) => (
+        <FeatureProject
+          href={`${base}/proyectos/${p.slug}/`}
+          chip={p.accion}
+          titulo={p.titulo}
+          fechas={p.fechas}
+          texto={p.texto}
+        />
+      ))}
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .project-card { text-decoration: none; color: inherit; transition: transform .2s; }
-  .project-card:hover { transform: translateY(-3px); color: inherit; }
-  .tag { display: inline-block; font-size: .8rem; font-weight: 600; color: #003399; background: #eef2fb; padding: 4px 10px; border-radius: 999px; margin-bottom: 12px; }
-  .fechas { color: var(--vina); font-weight: 600; font-size: .95rem; }
+  .proyectos { display: grid; gap: 32px; }
 </style>

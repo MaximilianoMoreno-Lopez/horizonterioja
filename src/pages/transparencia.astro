@@ -1,54 +1,99 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
 import { ORG, JUNTA } from '../lib/site.js';
 
 const mailto = `mailto:${ORG.email}`;
 ---
 
 <BaseLayout title="Transparencia" description="Datos registrales, junta directiva y documentación de la Asociación Juvenil Horizonte Rioja.">
-  <section class="page-hero">
-    <div class="container">
-      <span class="eyebrow">Transparencia</span>
-      <h1>Cuentas claras</h1>
-      <p class="lead">Quiénes somos legalmente, quién nos representa y cómo nos organizamos.</p>
-    </div>
-  </section>
+  <PageHero
+    eyebrow="Transparencia"
+    title="Cuentas claras"
+    lead="Quiénes somos legalmente, quién nos representa y cómo nos organizamos."
+    motivo="horizonte"
+  />
 
   <section class="section">
-    <div class="container prose">
-      <h2>Datos de la entidad</h2>
-      <table class="data-table">
-        <tbody>
-          <tr><th scope="row">Denominación</th><td>{ORG.nombreLegal}</td></tr>
-          <tr><th scope="row">Naturaleza</th><td>Asociación juvenil sin ánimo de lucro (Ley Orgánica 1/2002 y Real Decreto 397/1988)</td></tr>
-          <tr><th scope="row">NIF</th><td>{ORG.nif}</td></tr>
-          <tr><th scope="row">Inscripción</th><td>{ORG.registro}, desde el {ORG.fechaInscripcion}</td></tr>
-          <tr><th scope="row">Código Erasmus+ (OID)</th><td>{ORG.oid}</td></tr>
-          <tr><th scope="row">Domicilio social</th><td>{ORG.ciudad}</td></tr>
-          <tr><th scope="row">Ámbito</th><td>Comunidad Autónoma de La Rioja, con actuaciones en el ámbito nacional, europeo e internacional</td></tr>
-          <tr><th scope="row">Contacto</th><td>{ORG.email}</td></tr>
-        </tbody>
-      </table>
+    <div class="container editorial">
+      <div class="ed-row">
+        <div class="ed-side">
+          <h2>Datos de la entidad</h2>
+          <p class="sello" aria-hidden="true"><span>Registro</span><strong>n.º 1.008</strong><span>Sección 3.ª</span></p>
+        </div>
+        <div class="ed-body ed-tabla">
+          <table class="data-table">
+            <tbody>
+              <tr><th scope="row">Denominación</th><td>{ORG.nombreLegal}</td></tr>
+              <tr><th scope="row">Naturaleza</th><td>Asociación juvenil sin ánimo de lucro (Ley Orgánica 1/2002 y Real Decreto 397/1988)</td></tr>
+              <tr><th scope="row">NIF</th><td>{ORG.nif}</td></tr>
+              <tr><th scope="row">Inscripción</th><td>{ORG.registro}, desde el {ORG.fechaInscripcion}</td></tr>
+              <tr><th scope="row">Código Erasmus+ (OID)</th><td>{ORG.oid}</td></tr>
+              <tr><th scope="row">Domicilio social</th><td>{ORG.ciudad}</td></tr>
+              <tr><th scope="row">Ámbito</th><td>Comunidad Autónoma de La Rioja, con actuaciones en el ámbito nacional, europeo e internacional</td></tr>
+              <tr><th scope="row">Contacto</th><td>{ORG.email}</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-      <h2>Junta directiva</h2>
-      <table class="data-table">
-        <tbody>
-          {JUNTA.map((p) => <tr><th scope="row">{p.cargo}</th><td>{p.nombre}</td></tr>)}
-        </tbody>
-      </table>
+      <div class="ed-row">
+        <h2>Junta directiva</h2>
+        <div class="ed-body ed-tabla">
+          <table class="data-table">
+            <tbody>
+              {JUNTA.map((p) => <tr><th scope="row">{p.cargo}</th><td>{p.nombre}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
-      <h2>Gobierno de la asociación</h2>
-      <p>
-        El órgano supremo es la Asamblea General, formada por todas las personas socias, que se reúne al menos una
-        vez al año y decide por mayoría. La Junta Directiva gestiona la asociación entre asambleas.
-      </p>
+      <div class="ed-row">
+        <h2>Gobierno de la asociación</h2>
+        <div class="ed-body">
+          <p>
+            El órgano supremo es la Asamblea General, formada por todas las personas socias, que se reúne al menos una
+            vez al año y decide por mayoría. La Junta Directiva gestiona la asociación entre asambleas.
+          </p>
+        </div>
+      </div>
 
-      <h2>Documentación</h2>
-      <p>
-        La asociación inició su actividad en diciembre de 2025. Publicaremos aquí los estatutos, la memoria de
-        actividades y las cuentas del primer ejercicio en cuanto los apruebe la Asamblea General. Mientras tanto,
-        puedes pedir cualquier documento escribiendo a <a href={mailto}>{ORG.email}</a>.
-      </p>
+      <div class="ed-row">
+        <h2>Documentación</h2>
+        <div class="ed-body">
+          <p>
+            La asociación inició su actividad en diciembre de 2025. Publicaremos aquí los estatutos, la memoria de
+            actividades y las cuentas del primer ejercicio en cuanto los apruebe la Asamblea General. Mientras tanto,
+            puedes pedir cualquier documento escribiendo a <a href={mailto}>{ORG.email}</a>.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .ed-tabla { max-width: none; }
+  .ed-tabla td { font-size: 1rem; }
+  .sello {
+    display: none;
+    width: 140px;
+    height: 140px;
+    margin: 32px 0 0 10px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(107, 31, 58, .55);
+    outline: 1px solid rgba(107, 31, 58, .2);
+    outline-offset: 5px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: var(--vino);
+    transform: rotate(-8deg);
+    transform-origin: left center;
+    text-align: center;
+  }
+  .sello span { font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .sello strong { font-family: var(--serif); font-size: 1.22rem; font-weight: 600; line-height: 1.1; }
+  @media (min-width: 960px) { .sello { display: flex; } }
+</style>

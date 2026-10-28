@@ -8,6 +8,7 @@ const noticias = defineCollection({
     title: z.string(),
     date: z.string(), // AAAA-MM-DD
     description: z.string(),
+    erasmus: z.boolean().optional(), // true añade el aviso EUDisclaimer al final
   }),
 });
 

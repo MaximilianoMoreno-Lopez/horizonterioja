@@ -1,16 +1,70 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Arrow from '../components/Arrow.astro';
+import { ORG } from '../lib/site.js';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Hileras de viña que convergen hacia el horizonte.
+const hileras = Array.from({ length: 13 }, (_, i) => -420 + i * 85);
 ---
 
 <BaseLayout title="Página no encontrada">
-  <section class="section">
-    <div class="container prose">
-      <span class="eyebrow">Error 404</span>
-      <h1>Por aquí no hay camino</h1>
-      <p class="lead">La página que buscas no existe o ha cambiado de sitio.</p>
-      <a class="btn btn-primary" href={`${base}/`}>Volver al inicio</a>
+  <section class="page-hero error">
+    <div class="container error-grid">
+      <div class="error-texto">
+        <p class="eyebrow">Error 404</p>
+        <h1>Por aquí no hay camino</h1>
+        <p class="lead">La página que buscas no existe o ha cambiado de sitio.</p>
+        <div class="error-acciones">
+          <a class="btn btn-primary" href={`${base}/`}>Volver al inicio <Arrow /></a>
+          <a class="btn btn-ghost" href={`mailto:${ORG.email}`}>Escríbenos</a>
+        </div>
+      </div>
+
+      <svg class="error-arte" viewBox="0 0 600 400" aria-hidden="true" focusable="false">
+        <defs>
+          <clipPath id="campo-404"><path d="M0 236 C150 226 450 226 600 236 V400 H0Z" /></clipPath>
+          <clipPath id="arco-404"><path d="M40 400 V230 C40 110 160 24 300 24 C440 24 560 110 560 230 V400Z" /></clipPath>
+          <linearGradient id="cielo-404" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f3dcc0" />
+            <stop offset="1" stop-color="#faf1e4" />
+          </linearGradient>
+        </defs>
+        <g clip-path="url(#arco-404)">
+        <rect width="600" height="400" fill="url(#cielo-404)" />
+        <circle cx="300" cy="172" r="74" fill="none" stroke="#e0a43a" stroke-opacity=".28" stroke-width="1.5" />
+        <circle cx="300" cy="172" r="48" fill="#e0a43a" />
+        <path d="M0 214 L70 198 L140 206 L220 178 L290 200 L360 174 L440 198 L520 184 L600 194 V400 H0Z" fill="#ead9cc" />
+        <path d="M0 228 L90 216 L170 222 L250 206 L330 218 L410 204 L500 216 L600 210 V400 H0Z" fill="#dcc3b8" />
+        <path d="M0 236 C150 226 450 226 600 236 V400 H0Z" fill="#cdd8c1" />
+        <g clip-path="url(#campo-404)" stroke="#3f6b3a" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="0.5 12" fill="none">
+          {hileras.map((x) => <path d={`M${x} 420 L300 226`} />)}
+        </g>
+        <path d="M232 400 C252 360 276 324 290 300 L312 300 C326 324 350 360 370 400Z" fill="#f1e8da" stroke="#d4c1ad" stroke-width="1.5" />
+        <path d="M290 300 H312" stroke="#b9a48e" stroke-width="2" stroke-linecap="round" />
+        <g stroke="#6b1f3a" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M336 312 V238" fill="none" />
+          <path d="M310 240 H366 L376 249 L366 258 H310Z" fill="#fffdf9" />
+          <path d="M362 266 H306 L296 275 L306 284 H362Z" fill="#fffdf9" />
+        </g>
+        <g stroke="#e0a43a" stroke-width="2" stroke-linecap="round">
+          <path d="M322 249 H352" />
+          <path d="M314 275 H344" />
+        </g>
+        </g>
+        <path d="M40 400 V230 C40 110 160 24 300 24 C440 24 560 110 560 230 V400Z" fill="none" stroke="#d4c1ad" stroke-width="1.5" />
+      </svg>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .error { padding: clamp(40px, 6vw, 88px) 0 clamp(48px, 6vw, 88px); }
+  .error-grid { display: grid; gap: 32px; align-items: center; }
+  .error-arte { width: 100%; max-width: 420px; height: auto; display: block; justify-self: center; order: -1; }
+  .error-acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  @media (min-width: 860px) {
+    .error-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; }
+    .error-arte { max-width: 560px; order: 0; }
+  }
+</style>
