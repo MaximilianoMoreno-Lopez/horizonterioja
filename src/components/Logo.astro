@@ -1,0 +1,35 @@
+---
+// Versión vectorial del logo de Horizonte Rioja (las líneas del horizonte sobre el nombre).
+// El original está en el PIF de 2026, en relieve sobre fondo gris.
+interface Props {
+  claro?: boolean; // para fondos oscuros
+}
+const { claro = false } = Astro.props;
+---
+
+<span class:list={['logo', { claro }]}>
+  <svg class="swoosh" viewBox="0 0 310 32" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M17 28 C90 28 170 24 266 3" />
+    <path d="M78 20 C150 18 210 12 265 4" />
+    <path class="sol" d="M164 29 C220 22 262 12 288 13 C305 14 308 24 297 30" />
+  </svg>
+  <span class="word">Horizonte Rioja</span>
+</span>
+
+<style>
+  .logo { display: inline-grid; line-height: 1; }
+  .swoosh { width: 104%; height: .85em; overflow: visible; margin-bottom: -.1em; }
+  .swoosh path {
+    fill: none;
+    stroke: var(--vino);
+    stroke-width: 1.6px;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .swoosh .sol { stroke: var(--horizonte); stroke-width: 2px; }
+  .word { font-family: var(--serif); font-weight: 500; letter-spacing: .01em; color: var(--tinta); }
+
+  .claro .swoosh path { stroke: #f3d9e1; }
+  .claro .swoosh .sol { stroke: var(--horizonte); }
+  .claro .word { color: #fff; }
+</style>

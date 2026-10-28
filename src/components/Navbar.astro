@@ -1,5 +1,6 @@
 ---
 import { NAV, ORG } from '../lib/site.js';
+import Logo from './Logo.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = Astro.url.pathname.replace(base, '');
@@ -8,8 +9,7 @@ const path = Astro.url.pathname.replace(base, '');
 <header class="nav">
   <div class="container nav-inner">
     <a class="brand" href={`${base}/`} aria-label={`${ORG.nombre}, inicio`}>
-      <img src={`${base}/favicon.svg`} alt="" width="36" height="36" />
-      <span>{ORG.nombre}</span>
+      <Logo />
     </a>
 
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menú">
@@ -44,11 +44,7 @@ const path = Astro.url.pathname.replace(base, '');
     border-bottom: 1px solid var(--borde);
   }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; min-height: 68px; }
-  .brand {
-    display: flex; align-items: center; gap: 10px;
-    font-family: var(--serif); font-weight: 600; font-size: 1.25rem;
-    color: var(--tinta); text-decoration: none;
-  }
+  .brand { font-size: 1.45rem; text-decoration: none; padding-top: 4px; }
   .nav-toggle {
     display: grid; place-items: center;
     width: 44px; height: 44px;
