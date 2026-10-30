@@ -35,6 +35,10 @@ const year = new Date().getFullYear();
     </div>
   </div>
   <div class="container">
+    <div class="footer-eu">
+      <img src={`${base}/images/eu-cofinanciado.png`} alt="Cofinanciado por la Unión Europea" width="1000" height="210" loading="lazy" decoding="async" />
+      <p>Rural Identities (2026-1-ES02-KA210-YOU-000458045) está cofinanciado por el programa Erasmus+ de la Unión Europea.</p>
+    </div>
     <p class="footer-bottom">© {year} {ORG.nombreLegal} · NIF {ORG.nif} · {ORG.registro}</p>
   </div>
 </footer>
@@ -92,6 +96,22 @@ const year = new Date().getFullYear();
   .footer-mail { font-weight: 600; border-bottom: 1.5px solid rgba(224, 164, 58, .7); padding-bottom: 2px; }
   .footer-mail:hover { border-bottom-color: transparent; }
   .footer-title { font-weight: 700; color: var(--horizonte); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .6em; }
+  .footer-eu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+    margin-top: 40px;
+  }
+  .footer-eu img {
+    height: 52px;
+    width: auto;
+    background: #fff;
+    padding: 6px 10px;
+    border-radius: 8px;
+    box-sizing: content-box;
+  }
+  .footer-eu p { margin: 0; font-size: .8125rem; color: #e7cfd7; max-width: 52ch; }
   .footer-bottom {
     position: relative;
     margin: 40px 0 0;

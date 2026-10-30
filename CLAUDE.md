@@ -16,7 +16,7 @@ internos van desde la raíz (`/proyectos/...`).
   por eso la web solo dice "Logroño (La Rioja)".
 - Rural Identities (KA210-YOU, ronda 1 de 2026, 60.000 EUR, 31/12/2026-30/12/2027), socias
   Anellodebole (IT) y Hawk Stars NGO (PT). Código de proyecto 2026-1-ES02-KA210-YOU-000458045 (convenio de subvención).
-- Todo lo financiado por Erasmus+ lleva el aviso `EUDisclaimer`. Falta el emblema oficial de la UE.
+- Todo lo financiado por Erasmus+ lleva el aviso `EUDisclaimer` con el emblema oficial (`public/images/eu-cofinanciado.png`, el mismo que usa Estrellas del Sur); el pie lo muestra en todas las páginas.
 
 ## Logo
 Opción "A · Amanecer entre viñas" (zip Logo en Drive): sol de arcos de colores sobre el horizonte con

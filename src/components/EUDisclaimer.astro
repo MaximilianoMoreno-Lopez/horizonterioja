@@ -1,10 +1,10 @@
 ---
-// Aviso de financiación obligatorio en la comunicación de proyectos Erasmus+.
-// Pendiente: añadir el emblema oficial "Cofinanciado por la Unión Europea" en public/images/.
+// Aviso de financiación obligatorio en la comunicación de proyectos Erasmus+, con el emblema oficial.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <aside class="eu">
-  <p class="eu-title">Cofinanciado por la Unión Europea</p>
+  <img class="eu-emblema" src={`${base}/images/eu-cofinanciado.png`} alt="Cofinanciado por la Unión Europea" width="1000" height="210" loading="lazy" decoding="async" />
   <p>
     Las opiniones y puntos de vista expresados solo comprometen a su(s) autor(es) y no reflejan necesariamente los
     de la Unión Europea o los de la Agencia Nacional Española de la Juventud (INJUVE). Ni la Unión Europea ni la
@@ -23,6 +23,6 @@
     font-size: .9rem;
     color: var(--gris);
   }
-  .eu-title { font-weight: 700; color: #003399; margin-bottom: .3em; }
+  .eu-emblema { display: block; height: 48px; width: auto; margin-bottom: 14px; }
   .eu p:last-child { margin-bottom: 0; }
 </style>
